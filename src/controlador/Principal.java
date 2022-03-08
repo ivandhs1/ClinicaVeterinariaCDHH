@@ -9,8 +9,6 @@ public class Principal {
 	
 	public static void main(String arg[]) {
 		Relaciones misRelaciones = new Relaciones();
-		
-		System.out.println("HOLAA");
 
 	}
 	
