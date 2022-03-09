@@ -9,6 +9,7 @@ import modelo.vo.NacimientoVo;
 import modelo.vo.PersonaVo;
 import vista.gui.ActualizarPersonaGui;
 import vista.gui.ConsultarPersonaGui;
+import vista.gui.EliminarPersonaGui;
 import vista.gui.RegistrarMascotasGui;
 import vista.gui.RegistrarPersonasGui;
 import vista.gui.RegistrarProductosGui;
@@ -27,6 +28,7 @@ public class Coordinador {
 	MascotaDao miMascotaDao;
 	ProductoDao miProductoDao;
 	PersonaProductoDao miPersonaProductoDao;
+	private EliminarPersonaGui miEliminarPersonaGui;
 
 	public void setVentanaPrincipal(VentanaPrincipal miVentanaPrincipal) {
 		this.miVentanaPrincipal = miVentanaPrincipal;
@@ -96,6 +98,11 @@ public class Coordinador {
 		// TODO Auto-generated method stub
 		miConsultarPersonasGui.setVisible(true);
 	}
+	public void mostrarVentanaEliminarPersonas() {
+		miEliminarPersonaGui.setVisible(true);
+		miEliminarPersonaGui.limpiar();
+
+	}
 
 	public void mostrarActualizarPersonas() {
 		miActualizarPersonaGui.setVisible(true);
@@ -122,12 +129,7 @@ public class Coordinador {
 		return miNacimientoDao.consultarNacimiento(idNacimiento);
 
 	}
-
-	public void mostrarVentanaEliminar() {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 	public String actualizarNacimiento(NacimientoVo miNacimiento) {
 		return miNacimientoDao.actualizarNacimiento(miNacimiento);
 	}
@@ -135,6 +137,15 @@ public class Coordinador {
 	public String actualizarPersona(PersonaVo p) {
 		// TODO Auto-generated method stub
 		return miPersonaDao.actualizarPersona(p);
+	}
+
+	public void setEliminarPersonaGui(EliminarPersonaGui miEliminarPersonaGui) {
+		this.miEliminarPersonaGui=miEliminarPersonaGui;
+		
+	}
+
+	public String eliminarPersona(PersonaVo p) {
+		return miPersonaDao.eliminarPersona(p);
 	}
 
 }

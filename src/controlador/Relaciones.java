@@ -55,6 +55,7 @@ public class Relaciones {
 		// al coordinador se le asigna el control de cada clase unica
 
 		miCoordinador.setVentanaPrincipal(miVentanaPrincipal);
+		miCoordinador.setEliminarPersonaGui(miEliminarPersonaGui);
 		miCoordinador.setRegistrarPersonasGui(miRegistrarPersonasGui);
 		miCoordinador.setRegistrarMascotasGui(miRegistrarMascotasGui);
 		miCoordinador.setRegistrarProductosGui(miRegistrarProductosGui);
@@ -70,6 +71,7 @@ public class Relaciones {
 
 		miVentanaPrincipal.setCoordinador(miCoordinador);
 		miRegistrarPersonasGui.setCoordinador(miCoordinador);
+		miEliminarPersonaGui.setCoordinador(miCoordinador);
 		miRegistrarMascotasGui.setCoordinador(miCoordinador);
 		miRegistrarProductosGui.setCoordinador(miCoordinador);
 		miConsultarPersonaGui.setCoordinador(miCoordinador);

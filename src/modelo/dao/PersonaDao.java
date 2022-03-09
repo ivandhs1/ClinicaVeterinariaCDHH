@@ -157,7 +157,33 @@ public class PersonaDao {
 		
 	}
 
-	public void eliminarPersona() {
+	public String eliminarPersona(PersonaVo p) {
+
+		String resultado="";
+		Connection connection = null;
+		Conexion miConexion = new Conexion();
+		PreparedStatement preStatement = null;
+		connection = miConexion.getConnection();
 		
+		String consulta="DELETE FROM persona WHERE id_persona = ?";
+		
+		try {
+			
+			preStatement = connection.prepareStatement(consulta);
+			
+			preStatement.setLong(1, p.getIdPersona());
+			
+			preStatement.executeUpdate();
+			
+			resultado="ok";
+			
+			miConexion.desconectar();	
+			
+		} catch (SQLException e) {
+			System.out.println("Error en la eliminacion de datos de persona:"+e);
+			resultado="No Logrado";
+		}
+		
+		return resultado;
 	}
 }
