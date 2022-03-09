@@ -5,6 +5,7 @@ import modelo.dao.NacimientoDao;
 import modelo.dao.PersonaDao;
 import modelo.dao.PersonaProductoDao;
 import modelo.dao.ProductoDao;
+import vista.gui.ActualizarPersonaGui;
 import vista.gui.ConsultarPersonaGui;
 import vista.gui.RegistrarMascotasGui;
 import vista.gui.RegistrarPersonasGui;
@@ -28,6 +29,7 @@ public class Relaciones {
 		ProductoDao miProductoDao;
 		PersonaProductoDao miPersonaProductoDao;
 		ConsultarPersonaGui miConsultarPersonaGui;
+		ActualizarPersonaGui miActualizarPersonaGui;
 		
 		//se instacian por unica ocasion las clases declaradas
 		
@@ -36,6 +38,7 @@ public class Relaciones {
 		miRegistrarMascotasGui = new RegistrarMascotasGui(miVentanaPrincipal, true, "");
 		miRegistrarProductosGui = new RegistrarProductosGui(miVentanaPrincipal, true);
 		miConsultarPersonaGui = new ConsultarPersonaGui(miVentanaPrincipal, true);
+		miActualizarPersonaGui = new ActualizarPersonaGui(miVentanaPrincipal, true);
 		miCoordinador = new Coordinador();
 		miPersonaDao = new PersonaDao();
 		miMascotaDao = new MascotaDao();
@@ -52,6 +55,7 @@ public class Relaciones {
 		miCoordinador.setRegistrarMascotasGui(miRegistrarMascotasGui);
 		miCoordinador.setRegistrarProductosGui(miRegistrarProductosGui);
 		miCoordinador.setConsultarPersonaGui(miConsultarPersonaGui);
+		miCoordinador.setActualizarPersonaGui(miActualizarPersonaGui);
 		miCoordinador.setPersonaDao(miPersonaDao);
 		miCoordinador.setMascotaDao(miMascotaDao);
 		miCoordinador.setNacimientoDao(miNacimientoDao);
@@ -65,11 +69,13 @@ public class Relaciones {
 		miRegistrarMascotasGui.setCoordinador(miCoordinador);
 		miRegistrarProductosGui.setCoordinador(miCoordinador);
 		miConsultarPersonaGui.setCoordinador(miCoordinador);
+		miActualizarPersonaGui.setCoordinador(miCoordinador);
 		miPersonaDao.setCoordinador(miCoordinador);
 		miNacimientoDao.setCoordinador(miCoordinador);
 		miMascotaDao.setCoordinador(miCoordinador);
 		miProductoDao.setCoordinador(miCoordinador);
 		miPersonaProductoDao.setCoordinador(miCoordinador);
+		
 		
 		miVentanaPrincipal.setVisible(true);
 	}
