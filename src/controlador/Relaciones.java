@@ -6,6 +6,7 @@ import modelo.dao.PersonaDao;
 import modelo.dao.PersonaProductoDao;
 import modelo.dao.ProductoDao;
 import vista.gui.ConsultarPersonaGui;
+import vista.gui.EliminarPersonaGui;
 import vista.gui.RegistrarMascotasGui;
 import vista.gui.RegistrarPersonasGui;
 import vista.gui.RegistrarProductosGui;
@@ -28,6 +29,7 @@ public class Relaciones {
 		ProductoDao miProductoDao;
 		PersonaProductoDao miPersonaProductoDao;
 		ConsultarPersonaGui miConsultarPersonaGui;
+		EliminarPersonaGui miEliminarPersonaGui;
 		
 		//se instacian por unica ocasion las clases declaradas
 		
@@ -36,6 +38,8 @@ public class Relaciones {
 		miRegistrarMascotasGui = new RegistrarMascotasGui(miVentanaPrincipal, true, "");
 		miRegistrarProductosGui = new RegistrarProductosGui(miVentanaPrincipal, true);
 		miConsultarPersonaGui = new ConsultarPersonaGui(miVentanaPrincipal, true);
+		miEliminarPersonaGui = new EliminarPersonaGui(miVentanaPrincipal, true);
+		
 		miCoordinador = new Coordinador();
 		miPersonaDao = new PersonaDao();
 		miMascotaDao = new MascotaDao();

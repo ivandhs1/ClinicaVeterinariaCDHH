@@ -115,6 +115,11 @@ public class Coordinador {
 		
 	}
 
+	public void mostrarVentanaEliminar() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 	
