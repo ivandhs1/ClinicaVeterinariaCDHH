@@ -4,10 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,36 +21,40 @@ import javax.swing.border.TitledBorder;
 import controlador.Coordinador;
 import modelo.vo.PersonaVo;
 
-public class ConsultarPersonaGui extends JDialog implements ActionListener{
-	
+import java.awt.Color;
+import java.awt.SystemColor;
+
+public class ActualizarPersonaGui extends JDialog implements ActionListener {
+
 	Coordinador miCoordinador;
 	private final JPanel contentPanel = new JPanel();
 	JLabel lblDocumento, lblNombre, lblTelefono, lblProfesion, lblTipo, lblDatosNacimiento, lblFechaNacimiento, lblCiudad, lblDepartamento, lblPais;
 	JTextField txtDocumento, txtNombre, txtTelefono, txtProfesion, txtTipo, txtDia, txtMes, txtAnnio, txtCiudad, txtDepartamento, txtPais;
-	JButton btnBuscar, btnCancelar;
+	JButton btnBuscar, btnCancelar, btnActualizar;
+	PersonaVo p;
 	
 	public void setCoordinador(Coordinador miCoordinador) {
 		// TODO Auto-generated method stub
-		this.miCoordinador = miCoordinador;
+		this.miCoordinador=miCoordinador;
 	}
 	
-	public ConsultarPersonaGui(VentanaPrincipal miVentanaPrincipal, boolean modal) {
+	public ActualizarPersonaGui(VentanaPrincipal miVentanaPrincipal, boolean modal) {
 		// TODO Auto-generated constructor stub
 		super(miVentanaPrincipal,modal);
 		setSize( 622, 449);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
+		setTitle("Actualizacion de Personas");
 		iniciarComponentes();
-		setTitle("Consulta de Personas");
 		
 	}
-
+	
 	public void iniciarComponentes() {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		JLabel lblTitulo = new JLabel("CONSULTAR PERSONAS");
+		JLabel lblTitulo = new JLabel("ACTUALIZAR PERSONAS");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Tw Cen MT", Font.BOLD, 20));
 		lblTitulo.setBounds(10, 10, 599, 28);
@@ -173,15 +176,22 @@ public class ConsultarPersonaGui extends JDialog implements ActionListener{
 		panel.add(separator);
 		
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBackground(new Color(255, 192, 203));
 		btnCancelar.setBounds(473, 297, 89, 23);
 		btnCancelar.addActionListener(this);
 		panel.add(btnCancelar);
 		
 		btnBuscar = new JButton("Buscar");
+		btnBuscar.setBackground(SystemColor.activeCaption);
 		btnBuscar.setBounds(447,22,112,21);
 		btnBuscar.addActionListener(this);
 		panel.add(btnBuscar);
 		
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.setBackground(new Color(152, 251, 152));
+		btnActualizar.setBounds(369, 297, 97, 23);
+		btnActualizar.addActionListener(this);
+		panel.add(btnActualizar);
 	}
 	
 	@Override
@@ -189,12 +199,15 @@ public class ConsultarPersonaGui extends JDialog implements ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource()==btnBuscar) {
 			
+			txtDocumento.setEnabled(false);
+			
 			Long idDocumento=Long.parseLong(txtDocumento.getText());
-			PersonaVo p=miCoordinador.setConsultarPersonaGui(idDocumento);	
+			p=miCoordinador.setConsultarPersonaGui(idDocumento);
 			
 			if(p!=null) {
 				p.setNacimiento(miCoordinador.consultarNacimiento(p.getNacimiento().getIdNacimiento()));
 				System.out.println(p);
+				txtDocumento.setText((p.getIdPersona())+"");
 				txtNombre.setText(p.getNombre());
 				txtProfesion.setText(p.getProfesion());
 				txtTelefono.setText(p.getTelefono());
@@ -205,15 +218,62 @@ public class ConsultarPersonaGui extends JDialog implements ActionListener{
 				txtDia.setText(p.getNacimiento().getFechaNacimiento().getDayOfMonth()+"");
 				txtMes.setText(p.getNacimiento().getFechaNacimiento().getMonthValue()+"");
 				txtAnnio.setText(p.getNacimiento().getFechaNacimiento().getYear()+"");
+				System.out.println("persona buscada--"+p);
 				
 			}else {
 				JOptionPane.showMessageDialog(null, "No se encuentra la persona, verifique el documento","ADVERTENCIA!!",JOptionPane.WARNING_MESSAGE);
 			}
+
+		}else if(e.getSource()==btnActualizar) {
+			
+			
+			p.setIdPersona(Long.parseLong(txtDocumento.getText()));
+			p.setNombre(txtNombre.getText());
+			p.setProfesion(txtProfesion.getText());
+			p.setTelefono(txtTelefono.getText());
+			p.setTipo(Integer.parseInt(txtTipo.getText()));
+			
+			p.getNacimiento().setFechaNacimiento(LocalDate.of(Integer.parseInt(txtAnnio.getText()), Integer.parseInt(txtMes.getText()), Integer.parseInt(txtDia.getText())));
+			p.getNacimiento().setCiudadNacimiento(txtCiudad.getText());
+			p.getNacimiento().setDepartamentoNacimiento(txtDepartamento.getText());
+			p.getNacimiento().setPaisNacimiento(txtPais.getText());
+			
+			String verificacionNa=miCoordinador.actualizarNacimiento(p.getNacimiento());
+			
+			if(verificacionNa.equals("ok")) {
+				
+				String verificacionPer=miCoordinador.actualizarPersona(p);
+				
+				if(verificacionPer.equals("ok")) {
+					JOptionPane.showMessageDialog(null, "Actualizacion Exitosa");
+					this.dispose();
+				}
+				
+			}else {
+				System.out.println("Ocurrio un error");
+			}
+			
+			System.out.println("persona modificada -- "+p);
+			
 		}else if(e.getSource()==btnCancelar) {
-			this.dispose();
+			limpiar();
 		}
 	}
 
+	public void limpiar() {
+		// TODO Auto-generated method stub
+		txtDocumento.setEnabled(true);
+		txtDocumento.setText("");
+		txtNombre.setText("");
+		txtProfesion.setText("");
+		txtTelefono.setText("");
+		txtTipo.setText("");
+		txtAnnio.setText("");
+		txtMes.setText("");
+		txtDia.setText("");
+		txtDepartamento.setText("");
+		txtPais.setText("");
+		txtCiudad.setText("");
+	}
 	
-
 }

@@ -104,5 +104,41 @@ public class NacimientoDao {
 		return miNacimiento;
 		 
 	}
+	
+	public String actualizarNacimiento(NacimientoVo miNacimiento) {
+		
+		String resultado="";
+		Connection connection = null;
+		Conexion miConexion = new Conexion();
+		connection = miConexion.getConnection();
+		
+		try {
+			
+			String consulta="UPDATE nacimiento SET "
+					+ "ciudad_nacimiento = ?, departamento_nacimiento = ?, fecha_nacimiento = ?, pais_nacimiento = ? "
+					+ "WHERE id_nacimiento = ?";
+			
+			PreparedStatement preStatement = connection.prepareStatement(consulta);
+			
+			preStatement.setString(1, miNacimiento.getCiudadNacimiento());
+			preStatement.setString(2, miNacimiento.getDepartamentoNacimiento());
+			preStatement.setString(3, miNacimiento.getFechaNacimiento().toString());
+			preStatement.setString(4, miNacimiento.getPaisNacimiento());
+			preStatement.setLong(5, miNacimiento.getIdNacimiento());
+			
+			preStatement.executeUpdate();
+			
+			resultado="ok";
+			
+			miConexion.desconectar();	
+			
+		} catch (SQLException e) {
+			System.out.println("Error en la inserccion de datos de Nacimiento:"+e);
+			resultado="No Logrado";
+		}
+		
+		return resultado;
+		
+	}
 
 }
