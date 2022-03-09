@@ -119,7 +119,41 @@ public class PersonaDao {
 		
 	}
 	
-	public void actualizarPersona() {
+	public String actualizarPersona(PersonaVo p) {
+		
+		String resultado="";
+		Connection connection = null;
+		Conexion miConexion = new Conexion();
+		PreparedStatement preStatement = null;
+		connection = miConexion.getConnection();
+		
+		String consulta="UPDATE persona "
+				+ " SET nombre_persona= ?, profesion_persona = ?, telefono_persona = ?, tipo_persona = ?, nacimiento_id = ?"
+				+ " WHERE id_persona =?";
+		
+		try {
+			
+			preStatement = connection.prepareStatement(consulta);
+			
+			preStatement.setString(1, p.getNombre());
+			preStatement.setString(2, p.getProfesion());
+			preStatement.setString(3, p.getTelefono());
+			preStatement.setInt(4, p.getTipo());
+			preStatement.setLong(5, p.getNacimiento().getIdNacimiento());
+			preStatement.setLong(6, p.getIdPersona());
+			
+			preStatement.executeUpdate();
+			
+			resultado="ok";
+			
+			miConexion.desconectar();	
+			
+		} catch (SQLException e) {
+			System.out.println("Error en la inserccion de datos de persona:"+e);
+			resultado="No Logrado";
+		}
+		
+		return resultado;
 		
 	}
 
