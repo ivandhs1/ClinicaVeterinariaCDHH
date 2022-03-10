@@ -12,13 +12,14 @@ import modelo.vo.PersonaVo;
 import vista.gui.ActualizarPersonaGui;
 import vista.gui.ConsultarPersonaGui;
 import vista.gui.ListarPersonas;
+import vista.gui.EliminarPersonaGui;
 import vista.gui.RegistrarMascotasGui;
 import vista.gui.RegistrarPersonasGui;
 import vista.gui.RegistrarProductosGui;
 import vista.gui.VentanaPrincipal;
 
 public class Coordinador {
-	
+
 	VentanaPrincipal miVentanaPrincipal;
 	RegistrarPersonasGui miRegistrarPersonasGui;
 	RegistrarMascotasGui miRegistrarMascotasGui;
@@ -31,10 +32,9 @@ public class Coordinador {
 	ProductoDao miProductoDao;
 	PersonaProductoDao miPersonaProductoDao;
 	ListarPersonas miListarPersonas;
-	
+	private EliminarPersonaGui miEliminarPersonaGui;
 
 	public void setVentanaPrincipal(VentanaPrincipal miVentanaPrincipal) {
-		// TODO Auto-generated method stub
 		this.miVentanaPrincipal = miVentanaPrincipal;
 	}
 
@@ -52,12 +52,12 @@ public class Coordinador {
 		// TODO Auto-generated method stub
 		this.miRegistrarProductosGui = miRegistrarProductosGui;
 	}
-	
+
 	public void setConsultarPersonaGui(ConsultarPersonaGui miConsultarPersonaGui) {
 		// TODO Auto-generated method stub
-		this.miConsultarPersonasGui = miConsultarPersonaGui;		
+		this.miConsultarPersonasGui = miConsultarPersonaGui;
 	}
-	
+
 	public void setActualizarPersonaGui(ActualizarPersonaGui miActualizarPersonaGui) {
 		// TODO Auto-generated method stub
 		this.miActualizarPersonaGui = miActualizarPersonaGui;
@@ -97,13 +97,23 @@ public class Coordinador {
 		// TODO Auto-generated method stub
 		miRegistrarMascotasGui.setVisible(true);
 	}
+	
+	public void mostrarVentanaRegistroMascotas(long id) {
+		miRegistrarMascotasGui.atraparid(id);
+		miRegistrarMascotasGui.setVisible(true);
+	}
 
 	public void mostrarVentanaConsultaPersonas() {
 		// TODO Auto-generated method stub
 		miConsultarPersonasGui.setVisible(true);
 	}
-	
-	public void mostrarActualizarPersonas(){
+	public void mostrarVentanaEliminarPersonas() {
+		miEliminarPersonaGui.setVisible(true);
+		miEliminarPersonaGui.limpiar();
+
+	}
+
+	public void mostrarActualizarPersonas() {
 		miActualizarPersonaGui.setVisible(true);
 		miActualizarPersonaGui.limpiar();
 	}
@@ -126,7 +136,7 @@ public class Coordinador {
 	public NacimientoVo consultarNacimiento(Long idNacimiento) {
 		// TODO Auto-generated method stub
 		return miNacimientoDao.consultarNacimiento(idNacimiento);
-		
+
 	}
 	
 	public String actualizarNacimiento(NacimientoVo miNacimiento) {
@@ -156,7 +166,12 @@ public class Coordinador {
 		this.miActualizarPersonaGui = miActualizarPersonaGui;
 	} 
 	
-	
-	
-	
+	public void setEliminarPersonaGui(EliminarPersonaGui miEliminarPersonaGui) {
+		this.miEliminarPersonaGui=miEliminarPersonaGui;
+		
+	}
+
+	public String eliminarPersona(PersonaVo p) {
+		return miPersonaDao.eliminarPersona(p);
+	}
 }

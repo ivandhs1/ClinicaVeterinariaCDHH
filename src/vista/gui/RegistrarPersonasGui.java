@@ -239,7 +239,7 @@ public class RegistrarPersonasGui extends JDialog implements ActionListener{
 			}
 			
 		}else if(e.getSource()==btnAgregarMascotas) {
-			miCoordinador.mostrarVentanaRegistroMascotas();
+			miCoordinador.mostrarVentanaRegistroMascotas(Long.parseLong(txtDocumento.getText()));
 		}else if(e.getSource()==btnCancelar) {
 			this.dispose();
 		}
