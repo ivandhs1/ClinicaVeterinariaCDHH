@@ -1,7 +1,9 @@
 package vista.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -178,11 +180,13 @@ public class ConsultarPersonaGui extends JDialog implements ActionListener {
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(473, 297, 89, 23);
 		btnCancelar.addActionListener(this);
+		btnCancelar.setBackground(new Color(255, 192, 203));
 		panel.add(btnCancelar);
 
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.setBounds(447, 22, 112, 21);
 		btnBuscar.addActionListener(this);
+		btnBuscar.setBackground(SystemColor.activeCaption);
 		panel.add(btnBuscar);
 
 	}
