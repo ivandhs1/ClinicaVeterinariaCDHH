@@ -7,6 +7,7 @@ import modelo.dao.PersonaProductoDao;
 import modelo.dao.ProductoDao;
 import vista.gui.ActualizarPersonaGui;
 import vista.gui.ConsultarPersonaGui;
+import vista.gui.ListarPersonas;
 import vista.gui.EliminarPersonaGui;
 import vista.gui.RegistrarMascotasGui;
 import vista.gui.RegistrarPersonasGui;
@@ -32,9 +33,10 @@ public class Relaciones {
 		ConsultarPersonaGui miConsultarPersonaGui;
 		EliminarPersonaGui miEliminarPersonaGui;
 		ActualizarPersonaGui miActualizarPersonaGui;
-
-		// se instacian por unica ocasion las clases declaradas
-
+		ListarPersonas miListarPersonas;
+		
+		//se instacian por unica ocasion las clases declaradas
+		
 		miVentanaPrincipal = new VentanaPrincipal();
 		miRegistrarPersonasGui = new RegistrarPersonasGui(miVentanaPrincipal, true);
 		miRegistrarMascotasGui = new RegistrarMascotasGui(miVentanaPrincipal, true, "");
@@ -49,11 +51,12 @@ public class Relaciones {
 		miNacimientoDao = new NacimientoDao();
 		miProductoDao = new ProductoDao();
 		miPersonaProductoDao = new PersonaProductoDao();
-
-		// Se establece la relacion entre el coordinador y cada instancia unica
-
-		// al coordinador se le asigna el control de cada clase unica
-
+		miListarPersonas = new ListarPersonas();
+		
+		//Se establece la relacion entre el coordinador y cada instancia unica
+		
+		//al coordinador se le asigna el control de cada clase unica
+		
 		miCoordinador.setVentanaPrincipal(miVentanaPrincipal);
 		miCoordinador.setEliminarPersonaGui(miEliminarPersonaGui);
 		miCoordinador.setRegistrarPersonasGui(miRegistrarPersonasGui);
@@ -66,9 +69,10 @@ public class Relaciones {
 		miCoordinador.setNacimientoDao(miNacimientoDao);
 		miCoordinador.setProductoDao(miProductoDao);
 		miCoordinador.setPersonaProductoDao(miPersonaProductoDao);
-
-		// a cada clase unica se le asigna la unica instancia del coordinador
-
+		miCoordinador.setMiListarPersonas(miListarPersonas);
+		
+		//a cada clase unica se le asigna la unica instancia del coordinador
+		
 		miVentanaPrincipal.setCoordinador(miCoordinador);
 		miRegistrarPersonasGui.setCoordinador(miCoordinador);
 		miEliminarPersonaGui.setCoordinador(miCoordinador);
@@ -81,7 +85,8 @@ public class Relaciones {
 		miMascotaDao.setCoordinador(miCoordinador);
 		miProductoDao.setCoordinador(miCoordinador);
 		miPersonaProductoDao.setCoordinador(miCoordinador);
-
+		miListarPersonas.setMiCoordinador(miCoordinador);
+		
 		miVentanaPrincipal.setVisible(true);
 	}
 

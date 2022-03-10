@@ -1,5 +1,7 @@
 package controlador;
 
+import java.util.ArrayList;
+
 import modelo.dao.MascotaDao;
 import modelo.dao.NacimientoDao;
 import modelo.dao.PersonaDao;
@@ -9,6 +11,7 @@ import modelo.vo.NacimientoVo;
 import modelo.vo.PersonaVo;
 import vista.gui.ActualizarPersonaGui;
 import vista.gui.ConsultarPersonaGui;
+import vista.gui.ListarPersonas;
 import vista.gui.EliminarPersonaGui;
 import vista.gui.RegistrarMascotasGui;
 import vista.gui.RegistrarPersonasGui;
@@ -28,6 +31,7 @@ public class Coordinador {
 	MascotaDao miMascotaDao;
 	ProductoDao miProductoDao;
 	PersonaProductoDao miPersonaProductoDao;
+	ListarPersonas miListarPersonas;
 	private EliminarPersonaGui miEliminarPersonaGui;
 
 	public void setVentanaPrincipal(VentanaPrincipal miVentanaPrincipal) {
@@ -93,6 +97,11 @@ public class Coordinador {
 		// TODO Auto-generated method stub
 		miRegistrarMascotasGui.setVisible(true);
 	}
+	
+	public void mostrarVentanaRegistroMascotas(long id) {
+		miRegistrarMascotasGui.atraparid(id);
+		miRegistrarMascotasGui.setVisible(true);
+	}
 
 	public void mostrarVentanaConsultaPersonas() {
 		// TODO Auto-generated method stub
@@ -139,6 +148,24 @@ public class Coordinador {
 		return miPersonaDao.actualizarPersona(p);
 	}
 
+	public void mostrarListarPersonas() {
+		ArrayList<PersonaVo> personas = miPersonaDao.imprimirPersonas();
+		miListarPersonas.setVisible(true);
+		miListarPersonas.llenar(personas);
+	}
+
+	public void setMiListarPersonas(ListarPersonas miListarPersonas) {
+		this.miListarPersonas = miListarPersonas;
+	}
+
+	public void setMiConsultarPersonasGui(ConsultarPersonaGui miConsultarPersonasGui) {
+		this.miConsultarPersonasGui = miConsultarPersonasGui;
+	}
+
+	public void setMiActualizarPersonaGui(ActualizarPersonaGui miActualizarPersonaGui) {
+		this.miActualizarPersonaGui = miActualizarPersonaGui;
+	} 
+	
 	public void setEliminarPersonaGui(EliminarPersonaGui miEliminarPersonaGui) {
 		this.miEliminarPersonaGui=miEliminarPersonaGui;
 		
@@ -147,5 +174,4 @@ public class Coordinador {
 	public String eliminarPersona(PersonaVo p) {
 		return miPersonaDao.eliminarPersona(p);
 	}
-
 }

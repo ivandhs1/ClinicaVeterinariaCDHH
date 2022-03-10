@@ -142,4 +142,12 @@ public class RegistrarMascotasGui extends JDialog implements ActionListener{
 		// TODO Auto-generated method stub
 		this.miCoordinador = miCoordinador;
 	}
+
+
+	public void atraparid(long id) {
+		
+		txtIdDueno.setText(id+"");
+		txtIdDueno.setEnabled(false);
+		
+	}
 }
