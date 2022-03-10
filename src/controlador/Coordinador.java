@@ -1,5 +1,7 @@
 package controlador;
 
+import java.util.ArrayList;
+
 import modelo.dao.MascotaDao;
 import modelo.dao.NacimientoDao;
 import modelo.dao.PersonaDao;
@@ -9,6 +11,7 @@ import modelo.vo.NacimientoVo;
 import modelo.vo.PersonaVo;
 import vista.gui.ActualizarPersonaGui;
 import vista.gui.ConsultarPersonaGui;
+import vista.gui.ListarPersonas;
 import vista.gui.RegistrarMascotasGui;
 import vista.gui.RegistrarPersonasGui;
 import vista.gui.RegistrarProductosGui;
@@ -27,6 +30,7 @@ public class Coordinador {
 	MascotaDao miMascotaDao;
 	ProductoDao miProductoDao;
 	PersonaProductoDao miPersonaProductoDao;
+	ListarPersonas miListarPersonas;
 	
 
 	public void setVentanaPrincipal(VentanaPrincipal miVentanaPrincipal) {
@@ -132,6 +136,27 @@ public class Coordinador {
 	public String actualizarPersona(PersonaVo p) {
 		// TODO Auto-generated method stub
 		return miPersonaDao.actualizarPersona(p);
+	}
+
+	public void mostrarListarPersonas() {
+		ArrayList<PersonaVo> personas = miPersonaDao.imprimirPersonas();
+		miListarPersonas.setVisible(true);
+		miListarPersonas.llenar(personas);
+	}
+
+	public void setMiListarPersonas(ListarPersonas miListarPersonas) {
+		this.miListarPersonas = miListarPersonas;
+	}
+
+	public void setMiConsultarPersonasGui(ConsultarPersonaGui miConsultarPersonasGui) {
+		this.miConsultarPersonasGui = miConsultarPersonasGui;
+	}
+
+	public void setMiActualizarPersonaGui(ActualizarPersonaGui miActualizarPersonaGui) {
+		this.miActualizarPersonaGui = miActualizarPersonaGui;
 	} 
+	
+	
+	
 	
 }

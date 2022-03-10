@@ -32,14 +32,17 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 	private JMenuItem itemConsultarPersonas;
 	private JMenuItem itemActualizarPersonas;
 	private JMenuItem itemEliminarPersonas;
+	private JMenuItem itemListarPersonas;
 	private JMenuItem itemRegistrarMascotas;
 	private JMenuItem itemConsultarMascotas;
 	private JMenuItem itemActualizarMascotas;
+	private JMenuItem itemListarMascotas;
 	private JMenuItem itemEliminarMascotas;
 	private JMenuItem itemEliminarProductos;
 	private JMenuItem itemActualizarProductos;
 	private JMenuItem itemConsultaProductos;
 	private JMenuItem itemRegistroProductos;
+	private JMenuItem itemListarProductos;
 	private Coordinador miCoordinador;
 
 	/**
@@ -78,6 +81,10 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 		itemEliminarPersonas.addActionListener(this);
 		menuPersonas.add(itemEliminarPersonas);
 		
+		itemListarPersonas = new JMenuItem("Listar");
+		itemListarPersonas.addActionListener(this);
+		menuPersonas.add(itemListarPersonas);
+		
 		JMenu MenuMascotas = new JMenu("Gestionar Mascotas");
 		menuBar.add(MenuMascotas);
 		
@@ -97,6 +104,10 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 		itemEliminarMascotas.addActionListener(this);
 		MenuMascotas.add(itemEliminarMascotas);
 		
+		itemListarMascotas = new JMenuItem("Listar");
+		itemListarMascotas.addActionListener(this);
+		MenuMascotas.add(itemListarMascotas);
+		
 		JMenu menuProductos = new JMenu("Gestionar Productos");
 		menuBar.add(menuProductos);
 		
@@ -114,8 +125,13 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 		
 		itemEliminarProductos = new JMenuItem("Eliminar");
 		itemEliminarProductos.addActionListener(this);
-		
 		menuProductos.add(itemEliminarProductos);
+		
+		itemListarProductos = new JMenuItem("Listar");
+		itemListarProductos.addActionListener(this);
+		menuProductos.add(itemListarProductos);
+		
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -156,6 +172,9 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 		}
 		if (e.getSource()==itemActualizarPersonas) {
 			miCoordinador.mostrarActualizarPersonas();
+		}
+		if(e.getSource()==itemListarPersonas) {
+			miCoordinador.mostrarListarPersonas();
 		}
 	}
 

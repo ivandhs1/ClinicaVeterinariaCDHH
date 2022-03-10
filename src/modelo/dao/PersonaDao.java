@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.sound.midi.MidiChannel;
 
@@ -115,8 +116,55 @@ public class PersonaDao {
 		
 	}
 	
-	public void imprimirPersonas() {
+	public ArrayList<PersonaVo> imprimirPersonas() {
+		ArrayList<PersonaVo> personas = new ArrayList<PersonaVo>();
+		Connection connection=null;
+		Conexion miConexion = new Conexion();
+		PreparedStatement statement=null;
+		ResultSet result=null;
 		
+		PersonaVo miPersona=null;
+		NacimientoVo miNacimiento=null;
+		
+		connection=miConexion.getConnection();
+		
+		String consulta="SELECT * FROM persona";
+		
+		try {
+			
+			if(connection!=null) {
+				statement=connection.prepareStatement(consulta);
+
+				result=statement.executeQuery();
+				
+				while(result.next()==true) {
+					miPersona=new PersonaVo();
+					miPersona.setIdPersona(result.getLong("id_persona"));
+					miPersona.setNombre(result.getString("nombre_persona"));
+					miPersona.setProfesion(result.getString("profesion_persona"));
+					miPersona.setTelefono(result.getString("telefono_persona"));
+					miPersona.setTipo(result.getInt("tipo_persona"));
+					
+					
+					miNacimiento=miCoordinador.consultarNacimiento(result.getLong("nacimiento_id"));
+
+					miPersona.setNacimiento(miNacimiento);
+					
+					personas.add(miPersona);
+				}
+				
+				miConexion.desconectar();
+				
+			}else {
+				miPersona=null;
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			System.out.println("Error en la consulta de la persona: "+e.getMessage());
+		}
+		return personas;
 	}
 	
 	public String actualizarPersona(PersonaVo p) {
