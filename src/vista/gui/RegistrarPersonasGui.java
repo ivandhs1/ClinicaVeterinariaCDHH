@@ -1,6 +1,7 @@
 package vista.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -11,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -187,6 +189,7 @@ public class RegistrarPersonasGui extends JDialog implements ActionListener{
 		btnAgregarMascotas = new JButton("Agregar Mascotas");
 		btnAgregarMascotas.setBounds(364, 219, 190, 23);
 		btnAgregarMascotas.addActionListener(this);
+		btnAgregarMascotas.setBackground(SystemColor.activeCaption);
 		panel.add(btnAgregarMascotas);
 		
 		JSeparator separator = new JSeparator();
@@ -195,12 +198,14 @@ public class RegistrarPersonasGui extends JDialog implements ActionListener{
 		
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(463, 276, 89, 23);
+		btnCancelar.setBackground(new Color(255, 192, 203));
 		btnCancelar.addActionListener(this);
 		panel.add(btnCancelar);
 		
 		btnRegistrar = new JButton("Registrar");
 		btnRegistrar.setBounds(364, 276, 89, 23);
 		btnRegistrar.addActionListener(this);
+		btnRegistrar.setBackground(new Color(152, 251, 152));
 		panel.add(btnRegistrar);
 	}
 
