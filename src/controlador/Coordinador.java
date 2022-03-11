@@ -10,11 +10,14 @@ import modelo.dao.ProductoDao;
 import modelo.vo.MascotaVo;
 import modelo.vo.NacimientoVo;
 import modelo.vo.PersonaVo;
+import vista.gui.ActualizarMascotaGui;
 import vista.gui.ActualizarPersonaGui;
 import vista.gui.ConsultarMascotaGui;
 import vista.gui.ConsultarPersonaGui;
+import vista.gui.EliminarMascotaGui;
 import vista.gui.ListarPersonas;
 import vista.gui.EliminarPersonaGui;
+import vista.gui.ListarMascotasGui;
 import vista.gui.RegistrarMascotasGui;
 import vista.gui.RegistrarPersonasGui;
 import vista.gui.RegistrarProductosGui;
@@ -36,6 +39,9 @@ public class Coordinador {
 	ListarPersonas miListarPersonas;
 	ConsultarMascotaGui miConsultarMascotaGui;
 	private EliminarPersonaGui miEliminarPersonaGui;
+	private ListarMascotasGui miListarMascotas;
+	private EliminarMascotaGui miEliminarMascotaGui;
+	private ActualizarMascotaGui miActualizarMascotaGui;
 
 	public void setVentanaPrincipal(VentanaPrincipal miVentanaPrincipal) {
 		this.miVentanaPrincipal = miVentanaPrincipal;
@@ -65,7 +71,7 @@ public class Coordinador {
 		// TODO Auto-generated method stub
 		this.miActualizarPersonaGui = miActualizarPersonaGui;
 	}
-	
+
 	public void setConsultarMascotaGui(ConsultarMascotaGui miConsultarMascotaGui) {
 		// TODO Auto-generated method stub
 		this.miConsultarMascotaGui = miConsultarMascotaGui;
@@ -105,7 +111,7 @@ public class Coordinador {
 		// TODO Auto-generated method stub
 		miRegistrarMascotasGui.setVisible(true);
 	}
-	
+
 	public void mostrarVentanaRegistroMascotas(long id) {
 		miRegistrarMascotasGui.atraparid(id);
 		miRegistrarMascotasGui.setVisible(true);
@@ -115,15 +121,25 @@ public class Coordinador {
 		// TODO Auto-generated method stub
 		miConsultarPersonasGui.setVisible(true);
 	}
+
 	public void mostrarVentanaEliminarPersonas() {
 		miEliminarPersonaGui.setVisible(true);
 		miEliminarPersonaGui.limpiar();
 
 	}
+	public void mostrarVentanaEliminarMascota() {
+		miEliminarMascotaGui.setVisible(true);
+		miEliminarMascotaGui.limpiar();
+	}
 
 	public void mostrarActualizarPersonas() {
 		miActualizarPersonaGui.setVisible(true);
 		miActualizarPersonaGui.limpiar();
+	}
+	public void mostrarActualizarMascotas() {
+		miActualizarMascotaGui.setVisible(true);
+		miActualizarMascotaGui.limpiar();
+		
 	}
 
 	public String registrarPersona(PersonaVo miPersona) {
@@ -146,7 +162,7 @@ public class Coordinador {
 		return miNacimientoDao.consultarNacimiento(idNacimiento);
 
 	}
-	
+
 	public String actualizarNacimiento(NacimientoVo miNacimiento) {
 		return miNacimientoDao.actualizarNacimiento(miNacimiento);
 	}
@@ -155,11 +171,20 @@ public class Coordinador {
 		// TODO Auto-generated method stub
 		return miPersonaDao.actualizarPersona(p);
 	}
+	public String actualizarMascota(MascotaVo p) {
+		return miMascotaDao.actualizarMascota(p);
+	}
 
 	public void mostrarListarPersonas() {
 		ArrayList<PersonaVo> personas = miPersonaDao.imprimirPersonas();
 		miListarPersonas.setVisible(true);
 		miListarPersonas.llenar(personas);
+	}
+
+	public void mostrarListarMascotas() {
+		ArrayList<MascotaVo> mascotas = miMascotaDao.imprimirMascotas();
+		miListarMascotas.setVisible(true);
+		miListarMascotas.llenar(mascotas);
 	}
 
 	public void setMiListarPersonas(ListarPersonas miListarPersonas) {
@@ -172,15 +197,24 @@ public class Coordinador {
 
 	public void setMiActualizarPersonaGui(ActualizarPersonaGui miActualizarPersonaGui) {
 		this.miActualizarPersonaGui = miActualizarPersonaGui;
-	} 
+	}
+	
 	
 	public void setEliminarPersonaGui(EliminarPersonaGui miEliminarPersonaGui) {
-		this.miEliminarPersonaGui=miEliminarPersonaGui;
-		
+		this.miEliminarPersonaGui = miEliminarPersonaGui;
+
 	}
 
 	public String eliminarPersona(PersonaVo p) {
 		return miPersonaDao.eliminarPersona(p);
+	}
+	public String eliminarMascota(MascotaVo p) {
+		return miMascotaDao.eliminarMascota(p);
+	}
+
+	public void setMiListarMascotas(ListarMascotasGui miListarMascotas) {
+		this.miListarMascotas = miListarMascotas;
+
 	}
 
 	public String RegistrarMascotasGui(MascotaVo miMascota) {
@@ -198,5 +232,24 @@ public class Coordinador {
 		return miMascotaDao.consultarMascota(idMascota);
 	}
 
+	public void setMiEliminarMascotaGui(EliminarMascotaGui miEliminarMascotaGui) {
+		this.miEliminarMascotaGui=miEliminarMascotaGui;
+		
+	}
+
+	public void setMiActualizarMascotaGui(ActualizarMascotaGui miActualizarMascotaGui) {
+		this.miActualizarMascotaGui=miActualizarMascotaGui;
+		
+	}
+
 	
+
+	
+
+	
+
+	
+
+	
+
 }

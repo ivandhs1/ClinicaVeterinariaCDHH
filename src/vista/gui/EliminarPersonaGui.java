@@ -308,6 +308,10 @@ public class EliminarPersonaGui extends JDialog implements ActionListener{
 		txtDepartamento.setText("");
 		txtPais.setText("");
 		txtCiudad.setText("");
+		lblseguro.setVisible(false);
+		btnNo.setVisible(false);
+		btnSi.setVisible(false);
+		btnEliminar.setVisible(false);
 	}
 
 	public void setCoordinador(Coordinador miCoordinador) {
