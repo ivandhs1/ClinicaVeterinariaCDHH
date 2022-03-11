@@ -22,6 +22,7 @@ import javax.swing.border.TitledBorder;
 import controlador.Coordinador;
 import modelo.vo.MascotaVo;
 import modelo.vo.PersonaVo;
+import modelo.vo.PersonasProductosVo;
 import modelo.vo.ProductoVo;
 
 import javax.swing.JSeparator;
@@ -137,14 +138,16 @@ public class RegistrarProductosGui extends JDialog implements ActionListener{
 			miProducto.setIdProducto(Long.parseLong(txtIdProducto.getText()));
 			miProducto.setNombreProducto(txtNombre.getText());
 			miProducto.setPrecioProducto(Double.parseDouble(txtPrecio.getText()));
-			miProducto.setIdPersona(Long.parseLong(txtIdPersona.getText()));
 			
-			PersonaVo miPersona = miCoordinador.setConsultarPersonaGui(miProducto.getIdPersona());
+			PersonasProductosVo miPproducto = new PersonasProductosVo();
+			miPproducto.setPersonaId(Long.parseLong(txtIdPersona.getText()));
+			miPproducto.setProductoId(Long.parseLong(txtIdProducto.getText()));
+			PersonaVo miPersona = miCoordinador.setConsultarPersonaGui(miPproducto.getPersonaId());
 			
 			if(miPersona!=null) {
 				
 				String res = miCoordinador.registrarProducto(miProducto);
-				
+				String result = miCoordinador.registrarPproducto();
 				if(res.equals("ok")) {
 					JOptionPane.showMessageDialog(null, "Registro Exitoso!!");
 				}else {

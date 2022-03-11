@@ -20,6 +20,42 @@ public class PersonaProductoDao {
 		this.miCoordinador = miCoordinador;
 	}
 	
+	String resultado = "";
+	
+	Connection connection = null;
+	Conexion conexion = new Conexion();
+	PreparedStatement preStatement = null;
+	
+	connection = conexion.getConnection();
+	String consulta = "INSERT INTO personas_producto (id_producto, nombre_producto, precio_producto)" + "VALUES (?,?,?)";
+	
+	try {
+		
+		preStatement = connection.prepareStatement(consulta);
+		preStatement.setLong(1, miProducto.getIdProducto());
+		preStatement.setString(2, miProducto.getNombreProducto());
+		preStatement.setDouble(3, miProducto.getPrecioProducto());
+		
+		preStatement.execute();
+		
+		resultado="ok";
+		
+	} catch (SQLException e) {
+		// TODO: handle exception
+		System.out.println("No se pudo registrar la persona, verifique que el documento no exista: "+ e.getMessage());
+		e.printStackTrace();
+		resultado="No se pudo registrar la persona";
+		
+	} catch(Exception e) {
+		System.out.println("No se pudo registrar la persona: "+e.getMessage());
+		e.printStackTrace();
+		resultado="No se pudo registrar la persona";
+	
+	} finally {
+		conexion.desconectar();
+	}
+	
+	return resultado;
 	
 	
 	public String actualizarProductos(PersonaVo p) {

@@ -14,12 +14,12 @@ import javax.swing.JTable;
 
 import controlador.Coordinador;
 import modelo.vo.PersonaVo;
+import modelo.vo.ProductoVo;
 
 public class ListarProductos extends JDialog implements ActionListener{
 	
 	private JPanel miPanel;
 	private Coordinador miCoordinador;
-	private ArrayList<PersonaVo> personas;
 	private JTable miTabla;
 	private JLabel titulo;
 	private JScrollPane miScrol;
@@ -60,37 +60,29 @@ public class ListarProductos extends JDialog implements ActionListener{
 		this.miCoordinador = miCoordinador;
 	}
 
-	public void setPersonas(ArrayList<PersonaVo> personas) {
-		this.personas = personas;
-	}
 	
-	public void llenar(ArrayList<PersonaVo> personas) {
-		String titulos [] = {"documento","nombre","profesion","telefono","tipo","ciudadN","departamentoN","paisN","fechaN"};
+	public void llenar(ArrayList<ProductoVo> producto)  {
+		String titulos [] = {"IDproducto","nombre","precio","IDpersona"};
 		
-		System.out.println(personas.size());
+		System.out.println(producto.size());
 		int celdas;
-		if(personas.size()<15) {
+		if(producto.size()<15) {
 			celdas=14;
 		}else {
-			celdas=personas.size();
+			celdas=producto.size();
 		}
-		String cuadro [][]= new String [celdas][9];
-		if(personas.size()>0) {
+		String cuadro [][]= new String [celdas][4];
+		if(producto.size()>0) {
 			
 			
-			for (int i=0;i<personas.size();i++) {
-				cuadro[i][0]=personas.get(i).getIdPersona()+"";
-				cuadro[i][1]=personas.get(i).getNombre();
-				cuadro[i][2]=personas.get(i).getProfesion();
-				cuadro[i][3]=personas.get(i).getTelefono();
-				cuadro[i][4]=personas.get(i).getTipo()+"";
-				cuadro[i][5]=personas.get(i).getNacimiento().getCiudadNacimiento();
-				cuadro[i][6]=personas.get(i).getNacimiento().getDepartamentoNacimiento();
-				cuadro[i][7]=personas.get(i).getNacimiento().getPaisNacimiento();
-				cuadro[i][8]=personas.get(i).getNacimiento().getFechaNacimiento()+"";
+			for (int i=0;i<producto.size();i++) {
+				cuadro[i][0]=producto.get(i).getIdProducto()+"";
+				cuadro[i][1]=producto.get(i).getNombreProducto();
+				cuadro[i][2]=producto.get(i).getPrecioProducto()+"";
+				//cuadro[i][3]=producto.get(i).getIdPersona()+"";
 			}
 		}else {
-			 cuadro = new String [14][9];
+			 cuadro = new String [14][4];
 		}
 		
 		miTabla = new JTable(cuadro,titulos);

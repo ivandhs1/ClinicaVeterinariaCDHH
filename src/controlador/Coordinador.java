@@ -240,6 +240,7 @@ public class Coordinador {
 	
 	public void mostrarListarProductos() {
 		miListarProductos.setVisible(true);
+		miListarProductos.llenar(listarProductos());
 	}
 
 	public String eliminarMascota(MascotaVo p) {
@@ -299,6 +300,18 @@ public class Coordinador {
 	public ProductoVo consultarProducto(Long idProducto) {
 		// TODO Auto-generated method stub
 		return miProductoDao.consultarProducto(idProducto);
+	}
+	
+	public String actualizarProducto(ProductoVo producto) {
+		return miProductoDao.actualizarProducto(producto);
+	}
+	
+	public String eliminarProducto(ProductoVo producto) {
+		return miProductoDao.eliminarProducto(producto);
+	}
+	
+	public ArrayList<ProductoVo> listarProductos(){
+		return miProductoDao.imprimirProductos();
 	}
 	
 }

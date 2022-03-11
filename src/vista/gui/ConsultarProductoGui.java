@@ -137,7 +137,7 @@ public class ConsultarProductoGui extends JDialog implements ActionListener{
 			
 			if(miProducto!=null) {
 				
-				txtIdPersona.setText(miProducto.getIdPersona()+"");
+
 				txtNombre.setText(miProducto.getNombreProducto());
 				txtPrecio.setText(miProducto.getPrecioProducto()+"");
 				

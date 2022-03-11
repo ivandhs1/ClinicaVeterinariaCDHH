@@ -39,7 +39,7 @@ create table productos
 
 create table personas_producto
 (
-	id_personasproducto int auto_increment primary key,
+	id_personasproducto int primary key,
 	persona_id int,
     producto_id int
 );

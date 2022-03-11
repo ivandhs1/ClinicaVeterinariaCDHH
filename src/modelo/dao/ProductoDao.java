@@ -104,7 +104,7 @@ public class ProductoDao {
 		
 	}
 	
-	public ArrayList<ProductoVo> imprimirProducto() {
+	public ArrayList<ProductoVo> imprimirProductos() {
 		ArrayList<ProductoVo> productos = new ArrayList<ProductoVo>();
 		Connection connection=null;
 		Conexion miConexion = new Conexion();
@@ -155,8 +155,8 @@ public class ProductoDao {
 		PreparedStatement preStatement = null;
 		connection = miConexion.getConnection();
 		
-		String consulta="UPDATE producto "
-				+ " SET nombre_producto = ?,precio_producto = ?;"
+		String consulta="UPDATE productos "
+				+ " SET nombre_producto = ?,precio_producto = ?"
 				+ " WHERE id_producto = ?";
 		
 		try {
@@ -165,7 +165,7 @@ public class ProductoDao {
 			
 			preStatement.setString(1, p.getNombreProducto());
 			preStatement.setDouble(2, p.getPrecioProducto());
-			preStatement.setLong(2, p.getIdProducto());
+			preStatement.setLong(3, p.getIdProducto());
 			
 			preStatement.executeUpdate();
 			
@@ -188,7 +188,7 @@ public class ProductoDao {
 		PreparedStatement preStatement = null;
 		connection = miConexion.getConnection();
 		
-		String consulta="DELETE FROM producto WHERE id_persona = ?";
+		String consulta="DELETE FROM productos WHERE id_producto = ?";
 		
 		try {
 			
