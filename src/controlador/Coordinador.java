@@ -7,12 +7,14 @@ import modelo.dao.NacimientoDao;
 import modelo.dao.PersonaDao;
 import modelo.dao.PersonaProductoDao;
 import modelo.dao.ProductoDao;
+import modelo.vo.MascotaVo;
 import modelo.vo.NacimientoVo;
 import modelo.vo.PersonaVo;
 import vista.gui.ActualizarPersonaGui;
 import vista.gui.ConsultarPersonaGui;
 import vista.gui.ListarPersonas;
 import vista.gui.EliminarPersonaGui;
+import vista.gui.ListarMascotasGui;
 import vista.gui.RegistrarMascotasGui;
 import vista.gui.RegistrarPersonasGui;
 import vista.gui.RegistrarProductosGui;
@@ -33,6 +35,7 @@ public class Coordinador {
 	PersonaProductoDao miPersonaProductoDao;
 	ListarPersonas miListarPersonas;
 	private EliminarPersonaGui miEliminarPersonaGui;
+	private ListarMascotasGui miListarMascotas;
 
 	public void setVentanaPrincipal(VentanaPrincipal miVentanaPrincipal) {
 		this.miVentanaPrincipal = miVentanaPrincipal;
@@ -154,6 +157,11 @@ public class Coordinador {
 		miListarPersonas.llenar(personas);
 	}
 
+	public void mostrarListarMascotas() {
+		ArrayList<MascotaVo> mascotas = miMascotaDao.imprimirMascotas();
+		miListarMascotas.setVisible(true);
+		miListarMascotas.llenar(mascotas);
+	}
 	public void setMiListarPersonas(ListarPersonas miListarPersonas) {
 		this.miListarPersonas = miListarPersonas;
 	}
@@ -173,5 +181,10 @@ public class Coordinador {
 
 	public String eliminarPersona(PersonaVo p) {
 		return miPersonaDao.eliminarPersona(p);
+	}
+
+	public void setMiListarMascotas(ListarMascotasGui miListarMascotas) {
+		this.miListarMascotas=miListarMascotas;
+		
 	}
 }
