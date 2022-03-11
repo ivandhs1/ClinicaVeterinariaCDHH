@@ -1,6 +1,7 @@
 package vista.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -110,10 +111,12 @@ public class RegistrarMascotasGui extends JDialog implements ActionListener{
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(this);
 		btnCancelar.setBounds(271, 150, 89, 23);
+		btnCancelar.setBackground(new Color(255, 192, 203));
 		panel.add(btnCancelar);
 		
 		btnRegistrar = new JButton("Registrar");
 		btnRegistrar.setBounds(172, 150, 89, 23);
+		btnRegistrar.setBackground(new Color(152, 251, 152));
 		btnRegistrar.addActionListener(this);
 		panel.add(btnRegistrar);
 		
@@ -195,5 +198,14 @@ public class RegistrarMascotasGui extends JDialog implements ActionListener{
 		txtIdDueno.setText(id+"");
 		txtIdDueno.setEnabled(false);
 		
+	}
+
+
+	public void limpiar() {
+		// TODO Auto-generated method stub
+		txtIdDueno.setText("");
+		txtIdMascota.setText("");
+		txtNombre.setText("");
+		txtRaza.setText("");
 	}
 }

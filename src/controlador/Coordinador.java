@@ -115,11 +115,13 @@ public class Coordinador {
 	public void mostrarVentanaRegistroPersonas() {
 		// TODO Auto-generated method stub
 		miRegistrarPersonasGui.setVisible(true);
+		miRegistrarPersonasGui.limpiar();
 	}
 
 	public void mostrarVentanaRegistroMascotas() {
 		// TODO Auto-generated method stub
 		miRegistrarMascotasGui.setVisible(true);
+		miRegistrarMascotasGui.limpiar();
 	}
 
 	public void mostrarVentanaRegistroMascotas(long id) {
@@ -130,6 +132,7 @@ public class Coordinador {
 	public void mostrarVentanaConsultaPersonas() {
 		// TODO Auto-generated method stub
 		miConsultarPersonasGui.setVisible(true);
+		miConsultarPersonasGui.limpiar();
 	}
 
 	public void mostrarVentanaEliminarPersonas() {
@@ -247,6 +250,10 @@ public class Coordinador {
 	public String eliminarMascota(MascotaVo p) {
 		return miMascotaDao.eliminarMascota(p);
 	}
+	public String eliminarMascotaPorDuenno(PersonaVo p) {
+		// TODO Auto-generated method stub
+		return miMascotaDao.eliminarMascotaPorDuenno(p);
+	}
 
 	public void setMiListarMascotas(ListarMascotasGui miListarMascotas) {
 		this.miListarMascotas = miListarMascotas;
@@ -261,6 +268,7 @@ public class Coordinador {
 	public void mostrarVentanaConsultarMascota() {
 		// TODO Auto-generated method stub
 		miConsultarMascotaGui.setVisible(true);
+		miConsultarMascotaGui.limpiar();
 	}
 
 	public MascotaVo consultarMascota(Long idMascota) {
@@ -296,6 +304,7 @@ public class Coordinador {
 	public void mostrarVentanaConsultarProducto() {
 		// TODO Auto-generated method stub
 		miConsultarProductoGui.setVisible(true);
+		miConsultarProductoGui.limpiar();
 	}
 
 	public ProductoVo consultarProducto(Long idProducto) {
@@ -307,6 +316,7 @@ public class Coordinador {
 		return miProductoDao.actualizarProducto(producto);
 	}
 	
+
 	public String eliminarProducto(ProductoVo producto) {
 		return miProductoDao.eliminarProducto(producto);
 	}
@@ -344,4 +354,5 @@ public class Coordinador {
 	public ArrayList<Long> consultarproductos(long id){
 		return miPersonaProductoDao.selecionarProductos(id);
 	}
+
 }

@@ -1,6 +1,7 @@
 package vista.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -11,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -101,11 +103,13 @@ public class RegistrarProductosGui extends JDialog implements ActionListener{
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(this);
 		btnCancelar.setBounds(269, 120, 89, 23);
+		btnCancelar.setBackground(new Color(255, 192, 203));
 		panel.add(btnCancelar);
 		
 		btnRegistrar = new JButton("Registrar");
 		btnRegistrar.setBounds(173, 120, 89, 23);
 		btnRegistrar.addActionListener(this);
+		btnRegistrar.setBackground(new Color(152, 251, 152));
 		panel.add(btnRegistrar);
 		
 		JLabel lblidProducto = new JLabel("Id Producto: ");

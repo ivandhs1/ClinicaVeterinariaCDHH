@@ -295,11 +295,18 @@ public class EliminarPersonaGui extends JDialog implements ActionListener{
 			}
 			
 			p.setIdPersona(Long.parseLong(txtDocumento.getText()));
+			String verificacionMas = miCoordinador.eliminarMascotaPorDuenno(p);
+			if(verificacionMas.equals("ok")) {
+				JOptionPane.showMessageDialog(null, "La persona tenia mascotas se eliminaron Exitosamente");
+			}else{
+				JOptionPane.showMessageDialog(null, "La persona no tenia mascotas.");
+			}
+			
 			String verificacionEl = miCoordinador.eliminarPersona(p);
 			
 			if(verificacionEl.equals("ok")) {
 				
-				JOptionPane.showMessageDialog(null, "Eliminacion Exitosa");
+				JOptionPane.showMessageDialog(null, "Eliminacion de persona Exitosa");
 				this.dispose();
 				
 			}else {
