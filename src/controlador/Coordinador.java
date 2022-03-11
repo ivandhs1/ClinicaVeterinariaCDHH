@@ -217,6 +217,10 @@ public class Coordinador {
 	public String eliminarMascota(MascotaVo p) {
 		return miMascotaDao.eliminarMascota(p);
 	}
+	public String eliminarMascotaPorDuenno(PersonaVo p) {
+		// TODO Auto-generated method stub
+		return miMascotaDao.eliminarMascotaPorDuenno(p);
+	}
 
 	public void setMiListarMascotas(ListarMascotasGui miListarMascotas) {
 		this.miListarMascotas = miListarMascotas;
@@ -274,12 +278,6 @@ public class Coordinador {
 		// TODO Auto-generated method stub
 		return miProductoDao.consultarProducto(idProducto);
 	}
-
-	
-
-	
-
-	
 
 	
 
