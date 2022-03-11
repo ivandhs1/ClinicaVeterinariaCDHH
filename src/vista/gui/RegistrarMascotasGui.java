@@ -8,6 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +20,8 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import controlador.Coordinador;
+import modelo.vo.MascotaVo;
+import modelo.vo.PersonaVo;
 
 import javax.swing.JSeparator;
 import javax.swing.JComboBox;
@@ -28,10 +32,12 @@ public class RegistrarMascotasGui extends JDialog implements ActionListener{
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtIdDueno;
 	private JTextField txtNombre;
-	private JTextField txtTelefono;
+	private JTextField txtRaza;
 	private JButton btnCancelar;
 	private JButton btnRegistrar;
 	private Coordinador miCoordinador;
+	private JComboBox comboBoxSexo, comboBoxColor;
+	private JTextField txtIdMascota;
 
 
 	/**
@@ -92,10 +98,10 @@ public class RegistrarMascotasGui extends JDialog implements ActionListener{
 		lblRaza.setBounds(214, 49, 71, 21);
 		panel.add(lblRaza);
 		
-		txtTelefono = new JTextField();
-		txtTelefono.setColumns(10);
-		txtTelefono.setBounds(269, 49, 86, 20);
-		panel.add(txtTelefono);
+		txtRaza = new JTextField();
+		txtRaza.setColumns(10);
+		txtRaza.setBounds(269, 49, 86, 20);
+		panel.add(txtRaza);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(24, 127, 331, 12);
@@ -115,25 +121,65 @@ public class RegistrarMascotasGui extends JDialog implements ActionListener{
 		lblSexo.setBounds(24, 81, 71, 21);
 		panel.add(lblSexo);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Macho", "Hembra"}));
-		comboBox.setBounds(88, 81, 86, 22);
-		panel.add(comboBox);
+		comboBoxSexo = new JComboBox();
+		comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] {"Macho", "Hembra"}));
+		comboBoxSexo.setBounds(88, 81, 86, 22);
+		panel.add(comboBoxSexo);
 		
 		JLabel lblColor = new JLabel("Color:");
 		lblColor.setBounds(214, 82, 71, 21);
 		panel.add(lblColor);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Blanco", "Negro", "Caf\u00E9", "Gris", "Manchas"}));
-		comboBox_1.setBounds(269, 81, 86, 22);
-		panel.add(comboBox_1);
+		comboBoxColor = new JComboBox();
+		comboBoxColor.setModel(new DefaultComboBoxModel(new String[] {"Blanco", "Negro", "Caf\u00E9", "Gris", "Manchas"}));
+		comboBoxColor.setBounds(269, 81, 86, 22);
+		panel.add(comboBoxColor);
+		
+		txtIdMascota = new JTextField();
+		txtIdMascota.setBounds(88, 17, 86, 20);
+		panel.add(txtIdMascota);
+		
+		JLabel lblIdMascota = new JLabel("Id Mascota:");
+		lblIdMascota.setBounds(24, 20, 71, 14);
+		panel.add(lblIdMascota);
 	}
 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		
+		if(e.getSource()==btnRegistrar) {
+			
+			MascotaVo miMascota = new MascotaVo();
+			miMascota.setIdMascota(Long.parseLong(txtIdMascota.getText()));
+			miMascota.setNombre(txtNombre.getText());
+			miMascota.setRaza(txtRaza.getText());
+			miMascota.setSexo((String) comboBoxSexo.getSelectedItem());
+			miMascota.setColorMascota((String) comboBoxColor.getSelectedItem());
+			miMascota.setIdDueno(Long.parseLong(txtIdDueno.getText()));
+			
+			PersonaVo miPersona = miCoordinador.setConsultarPersonaGui(miMascota.getIdDueno());
+			
+			if(miPersona != null) {
+				
+				String res = miCoordinador.RegistrarMascotasGui(miMascota);
+				
+				if(res.equals("ok")) {
+					JOptionPane.showMessageDialog(null, "Registro Exitoso!!");
+				}else {
+					JOptionPane.showMessageDialog(null, res, "ERROR", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}else {
+				JOptionPane.showMessageDialog(null, "Id de Dueño no existente, Porfavor ingrese uno existente");
+			}
+			
+			
+			
+		}else if(e.getSource()==btnCancelar) {
+			this.dispose();
+		}
 		
 	}
 
