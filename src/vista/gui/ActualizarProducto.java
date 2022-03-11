@@ -1,6 +1,7 @@
 package vista.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 
 import controlador.Coordinador;
 import modelo.vo.PersonaVo;
+import modelo.vo.PersonasProductosVo;
 import modelo.vo.ProductoVo;
 
 public class ActualizarProducto extends JDialog implements ActionListener{
@@ -88,6 +90,7 @@ public class ActualizarProducto extends JDialog implements ActionListener{
 		panel.add(btnCancelar);
 	
 		btnActualizar = new JButton("Actualizar");
+		btnActualizar.setBackground(new Color(152, 251, 152));
 		btnActualizar.addActionListener(this);
 		btnActualizar.setBounds(146, 144, 100, 23);
 		panel.add(btnActualizar);
@@ -127,7 +130,8 @@ public class ActualizarProducto extends JDialog implements ActionListener{
 			
 			if(miProducto!=null) {
 				
-				txtIdPersona.setText(miProducto.getIdPersona()+"");
+				PersonasProductosVo produc = miCoordinador.buscarPproducto(Long.parseLong(txtIdProducto.getText())); 
+				txtIdPersona.setText(produc.getProductoId()+"");
 				txtNombre.setText(miProducto.getNombreProducto());
 				txtPrecio.setText(miProducto.getPrecioProducto()+"");
 				
@@ -144,12 +148,9 @@ public class ActualizarProducto extends JDialog implements ActionListener{
 			miProducto.setNombreProducto(txtNombre.getText());
 			miProducto.setPrecioProducto(Double.parseDouble(txtPrecio.getText()));
 			
-			System.out.println(txtIdProducto.getText());
-			System.out.println(txtNombre.getText());
-			System.out.println(txtPrecio.getText());
-			txtIdPersona.getText();
+			PersonasProductosVo produc = miCoordinador.buscarPproducto(Long.parseLong(txtIdProducto.getText())); 
+			PersonaVo miPersona = miCoordinador.setConsultarPersonaGui(Long.parseLong(txtIdPersona.getText()));
 			
-			//PersonaVo miPersona = miCoordinador.setConsultarPersonaGui(miProducto.getIdPersona());
 			
 			if(miPersona!=null) {
 				
@@ -162,7 +163,7 @@ public class ActualizarProducto extends JDialog implements ActionListener{
 				}
 				
 			}else {
-				JOptionPane.showMessageDialog(null, "Producto no existente");
+				JOptionPane.showMessageDialog(null, "Persona no existe");
 			}
 		}
 	}

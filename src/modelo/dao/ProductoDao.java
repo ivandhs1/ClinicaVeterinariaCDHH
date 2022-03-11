@@ -83,7 +83,7 @@ public class ProductoDao {
 				statement.setLong(1, idProducto);
 				result = statement.executeQuery();
 
-				while (result.next() == true) {
+				if(result.next() == true) {
 
 					miProducto = new ProductoVo();
 					miProducto.setNombreProducto(result.getString("nombre_producto"));
@@ -209,5 +209,33 @@ public class ProductoDao {
 		
 		return resultado;
 	}
-
+	
+	public String eliminarProductop(long id) {
+		String resultado="";
+		Connection connection = null;
+		Conexion miConexion = new Conexion();
+		PreparedStatement preStatement = null;
+		connection = miConexion.getConnection();
+		
+		String consulta="DELETE FROM productos WHERE id_producto = ?";
+		
+		try {
+			
+			preStatement = connection.prepareStatement(consulta);
+			
+			preStatement.setLong(1, id);
+			
+			preStatement.executeUpdate();
+			
+			resultado="ok";
+			
+			miConexion.desconectar();	
+			
+		} catch (SQLException e) {
+			System.out.println("Error en la eliminacion de datos de persona:"+e);
+			resultado="No Logrado";
+		}
+		
+		return resultado;
+	}
 }

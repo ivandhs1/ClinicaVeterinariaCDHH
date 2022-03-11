@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
@@ -21,6 +22,7 @@ import javax.swing.border.TitledBorder;
 
 import controlador.Coordinador;
 import modelo.vo.PersonaVo;
+import modelo.vo.PersonasProductosVo;
 
 import javax.swing.JSeparator;
 import java.awt.Color;
@@ -281,6 +283,17 @@ public class EliminarPersonaGui extends JDialog implements ActionListener{
 			btnNo.setVisible(false);
 			btnSi.setVisible(false);
 		}if(e.getSource()==btnSi) {
+			
+			ArrayList<Long> productos = miCoordinador.consultarproductos(Long.parseLong(txtDocumento.getText()));
+			
+			String eliminarPers = miCoordinador.eliminarProductosPerso(Long.parseLong(txtDocumento.getText()));
+			
+			for(int i = 0;i<productos.size();i++) {
+				
+				String elimi = miCoordinador.eliminarProporid(productos.get(i));
+				
+			}
+			
 			p.setIdPersona(Long.parseLong(txtDocumento.getText()));
 			String verificacionEl = miCoordinador.eliminarPersona(p);
 			

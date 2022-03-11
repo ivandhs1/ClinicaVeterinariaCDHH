@@ -10,6 +10,7 @@ import modelo.dao.ProductoDao;
 import modelo.vo.MascotaVo;
 import modelo.vo.NacimientoVo;
 import modelo.vo.PersonaVo;
+import modelo.vo.PersonasProductosVo;
 import modelo.vo.ProductoVo;
 import vista.gui.ActualizarMascotaGui;
 import vista.gui.ActualizarPersonaGui;
@@ -314,4 +315,33 @@ public class Coordinador {
 		return miProductoDao.imprimirProductos();
 	}
 	
+	public PersonasProductosVo buscarPproducto(long codigo) {
+		return miPersonaProductoDao.consultarProducto(codigo);
+	}
+	
+	public String crearPproducto(PersonasProductosVo produc) {
+	 return	miPersonaProductoDao.registrarProducto(produc);
+	}
+	
+	public String actualizarPproducto(PersonasProductosVo produc) {
+		return miPersonaProductoDao.actualizarProductos(produc);
+	}
+	
+	public String eliminarPprodcuto(PersonasProductosVo produc) {
+		return miPersonaProductoDao.eliminarProductos(produc);
+	}
+	
+	public String eliminarProductosPerso(long id) {
+		return miPersonaProductoDao.eliminarProductosP(id);
+	}
+	
+	public String eliminarProporid(long id) {
+	
+		return	 miProductoDao.eliminarProductop(id);
+	
+	}
+	
+	public ArrayList<Long> consultarproductos(long id){
+		return miPersonaProductoDao.selecionarProductos(id);
+	}
 }

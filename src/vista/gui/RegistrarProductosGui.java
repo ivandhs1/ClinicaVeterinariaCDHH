@@ -147,8 +147,8 @@ public class RegistrarProductosGui extends JDialog implements ActionListener{
 			if(miPersona!=null) {
 				
 				String res = miCoordinador.registrarProducto(miProducto);
-				String result = miCoordinador.registrarPproducto();
-				if(res.equals("ok")) {
+				String result = miCoordinador.crearPproducto(miPproducto);
+				if(res.equals("ok") && result.equals("ok")) {
 					JOptionPane.showMessageDialog(null, "Registro Exitoso!!");
 				}else {
 					JOptionPane.showMessageDialog(null, res, "ERROR", JOptionPane.ERROR_MESSAGE);

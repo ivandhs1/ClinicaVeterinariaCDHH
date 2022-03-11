@@ -22,6 +22,7 @@ import javax.swing.border.TitledBorder;
 import controlador.Coordinador;
 import modelo.vo.MascotaVo;
 import modelo.vo.PersonaVo;
+import modelo.vo.PersonasProductosVo;
 import modelo.vo.ProductoVo;
 
 import javax.swing.JSeparator;
@@ -136,8 +137,8 @@ public class ConsultarProductoGui extends JDialog implements ActionListener{
 			ProductoVo miProducto = miCoordinador.consultarProducto(idProducto);
 			
 			if(miProducto!=null) {
-				
-
+				PersonasProductosVo produc = miCoordinador.buscarPproducto(Long.parseLong(txtIdProducto.getText()));
+				txtIdPersona.setText(produc.getPersonaId()+"");
 				txtNombre.setText(miProducto.getNombreProducto());
 				txtPrecio.setText(miProducto.getPrecioProducto()+"");
 				

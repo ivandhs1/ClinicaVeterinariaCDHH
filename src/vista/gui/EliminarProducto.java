@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 
 import controlador.Coordinador;
 import modelo.vo.PersonaVo;
+import modelo.vo.PersonasProductosVo;
 import modelo.vo.ProductoVo;
 
 public class EliminarProducto extends JDialog implements ActionListener{
@@ -26,6 +27,7 @@ public class EliminarProducto extends JDialog implements ActionListener{
 	private JTextField txtIdPersona;
 	private JLabel lblseguro;
 	private ProductoVo miProducto;
+	private PersonasProductosVo produc;
 
 
 	/**
@@ -149,7 +151,8 @@ public class EliminarProducto extends JDialog implements ActionListener{
 			miProducto = miCoordinador.consultarProducto(idProducto);
 			
 			if(miProducto!=null) {
-				
+				produc = miCoordinador.buscarPproducto(Long.parseLong(txtIdProducto.getText()));
+				txtIdPersona.setText(produc.getPersonaId()+"");
 				txtNombre.setText(miProducto.getNombreProducto());
 				txtPrecio.setText(miProducto.getPrecioProducto()+"");
 				
@@ -172,10 +175,15 @@ public class EliminarProducto extends JDialog implements ActionListener{
 			btnSi.setVisible(false);
 		}else if(e.getSource()==btnSi) {
 			
+			produc.setProductoId(Long.parseLong(txtIdProducto.getText()));
+			String eli = miCoordinador.eliminarPprodcuto(produc);
+			
 			miProducto.setIdProducto(Long.parseLong(txtIdProducto.getText()));
 			String verificacionEl = miCoordinador.eliminarProducto(miProducto);
 			
-			if(verificacionEl.equals("ok")) {
+			
+			
+			if(verificacionEl.equals("ok") && eli.equals("ok")) {
 				
 				JOptionPane.showMessageDialog(null, "Eliminacion Exitosa");
 				this.dispose();

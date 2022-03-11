@@ -14,6 +14,7 @@ import javax.swing.JTable;
 
 import controlador.Coordinador;
 import modelo.vo.PersonaVo;
+import modelo.vo.PersonasProductosVo;
 import modelo.vo.ProductoVo;
 
 public class ListarProductos extends JDialog implements ActionListener{
@@ -23,7 +24,7 @@ public class ListarProductos extends JDialog implements ActionListener{
 	private JTable miTabla;
 	private JLabel titulo;
 	private JScrollPane miScrol;
-	
+	private PersonasProductosVo produc;
 	public ListarProductos() {
 		setSize( 672, 449);
 		setLocationRelativeTo(null);
@@ -63,7 +64,6 @@ public class ListarProductos extends JDialog implements ActionListener{
 	
 	public void llenar(ArrayList<ProductoVo> producto)  {
 		String titulos [] = {"IDproducto","nombre","precio","IDpersona"};
-		
 		System.out.println(producto.size());
 		int celdas;
 		if(producto.size()<15) {
@@ -76,10 +76,11 @@ public class ListarProductos extends JDialog implements ActionListener{
 			
 			
 			for (int i=0;i<producto.size();i++) {
+				produc = miCoordinador.buscarPproducto(producto.get(i).getIdProducto());
 				cuadro[i][0]=producto.get(i).getIdProducto()+"";
 				cuadro[i][1]=producto.get(i).getNombreProducto();
 				cuadro[i][2]=producto.get(i).getPrecioProducto()+"";
-				//cuadro[i][3]=producto.get(i).getIdPersona()+"";
+				cuadro[i][3]=produc.getPersonaId()+"";
 			}
 		}else {
 			 cuadro = new String [14][4];
