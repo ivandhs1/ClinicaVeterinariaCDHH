@@ -28,6 +28,20 @@ create table mascotas(
 	persona_id int
 );
 
+create table productos 
+(
+	id_producto int primary key not null,
+    nombre_producto varchar(45),
+    precio_producto double
+);
+
+create table personas_producto
+(
+	id_personasproducto int auto_increment primary key,
+	persona_id int,
+    producto_id int
+);
+
 alter table persona
 add index fk_persona_nacimiento (nacimiento_id ASC);
 alter table persona
@@ -45,3 +59,23 @@ add constraint fk_mascotas_persona
 	references persona (id_persona)
 	on delete no action
 	on update no action;
+    
+ALTER TABLE `bd_clinica`.`personas_producto` 
+ADD INDEX `fk_persona_id_id_persona_idx` (`persona_id` ASC) ;
+;
+ALTER TABLE `bd_clinica`.`personas_producto` 
+ADD CONSTRAINT `fk_persona_id_id_persona`
+  FOREIGN KEY (`persona_id`)
+  REFERENCES `bd_clinica`.`persona` (`id_persona`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+ALTER TABLE `bd_clinica`.`personas_producto` 
+ADD INDEX `fk_producto_id_id_producto_idx` (`producto_id` ASC);
+;
+ALTER TABLE `bd_clinica`.`personas_producto` 
+ADD CONSTRAINT `fk_producto_id_id_producto`
+  FOREIGN KEY (`producto_id`)
+  REFERENCES `bd_clinica`.`productos` (`id_producto`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
