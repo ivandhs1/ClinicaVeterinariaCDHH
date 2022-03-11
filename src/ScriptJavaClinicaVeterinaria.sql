@@ -20,7 +20,11 @@ create table nacimiento(
 );
 
 create table mascotas(
+<<<<<<< HEAD
 	id_mascotas int(20) primary key not null,
+=======
+	id_mascotas int primary key not null,
+>>>>>>> 0d9f5e650be78afa29b39ce677f47fab21df5b32
 	color varchar(45),
 	nombre varchar(45),
 	raza varchar(45),
