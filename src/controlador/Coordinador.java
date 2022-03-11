@@ -13,12 +13,15 @@ import modelo.vo.PersonaVo;
 import modelo.vo.ProductoVo;
 import vista.gui.ActualizarMascotaGui;
 import vista.gui.ActualizarPersonaGui;
+import vista.gui.ActualizarProducto;
 import vista.gui.ConsultarMascotaGui;
 import vista.gui.ConsultarPersonaGui;
 import vista.gui.ConsultarProductoGui;
 import vista.gui.EliminarMascotaGui;
 import vista.gui.ListarPersonas;
+import vista.gui.ListarProductos;
 import vista.gui.EliminarPersonaGui;
+import vista.gui.EliminarProducto;
 import vista.gui.ListarMascotasGui;
 import vista.gui.RegistrarMascotasGui;
 import vista.gui.RegistrarPersonasGui;
@@ -39,6 +42,9 @@ public class Coordinador {
 	ProductoDao miProductoDao;
 	PersonaProductoDao miPersonaProductoDao;
 	ListarPersonas miListarPersonas;
+	ActualizarProducto miActualizarProducto;
+	EliminarProducto miEliminarProducto;
+	ListarProductos miListarProductos;
 	ConsultarMascotaGui miConsultarMascotaGui;
 	private EliminarPersonaGui miEliminarPersonaGui;
 	private ListarMascotasGui miListarMascotas;
@@ -193,6 +199,18 @@ public class Coordinador {
 	public void setMiListarPersonas(ListarPersonas miListarPersonas) {
 		this.miListarPersonas = miListarPersonas;
 	}
+	
+	public void setMiActualizarProducto(ActualizarProducto miActualizarProducto) {
+		this.miActualizarProducto = miActualizarProducto;
+	}
+	
+	public void setMiEliminarProducto(EliminarProducto miEliminarProdcutos) {
+		this.miEliminarProducto = miEliminarProdcutos;
+	}
+	
+	public void setMiListarProductos(ListarProductos miListarProductos) {
+		this.miListarProductos = miListarProductos;
+	}
 
 	public void setMiConsultarPersonasGui(ConsultarPersonaGui miConsultarPersonasGui) {
 		this.miConsultarPersonasGui = miConsultarPersonasGui;
@@ -211,6 +229,20 @@ public class Coordinador {
 	public String eliminarPersona(PersonaVo p) {
 		return miPersonaDao.eliminarPersona(p);
 	}
+	
+	public void mostrarActualizarProductos() {
+		miActualizarProducto.setVisible(true);
+	}
+	
+	public void mostrarEliminarProductos() {
+		miEliminarProducto.setVisible(true);
+	}
+	
+	public void mostrarListarProductos() {
+		miListarProductos.setVisible(true);
+		miListarProductos.llenar(listarProductos());
+	}
+
 	public String eliminarMascota(MascotaVo p) {
 		return miMascotaDao.eliminarMascota(p);
 	}
@@ -269,15 +301,17 @@ public class Coordinador {
 		// TODO Auto-generated method stub
 		return miProductoDao.consultarProducto(idProducto);
 	}
-
 	
-
+	public String actualizarProducto(ProductoVo producto) {
+		return miProductoDao.actualizarProducto(producto);
+	}
 	
-
+	public String eliminarProducto(ProductoVo producto) {
+		return miProductoDao.eliminarProducto(producto);
+	}
 	
-
+	public ArrayList<ProductoVo> listarProductos(){
+		return miProductoDao.imprimirProductos();
+	}
 	
-
-	
-
 }

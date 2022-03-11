@@ -1,5 +1,7 @@
 create database bd_clinica;
 
+
+
 use bd_clinica;
 
 create table persona(
@@ -37,7 +39,7 @@ create table productos
 
 create table personas_producto
 (
-	id_personasproducto int auto_increment primary key,
+	id_personasproducto int primary key,
 	persona_id int,
     producto_id int
 );
@@ -79,3 +81,4 @@ ADD CONSTRAINT `fk_producto_id_id_producto`
   REFERENCES `bd_clinica`.`productos` (`id_producto`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+  

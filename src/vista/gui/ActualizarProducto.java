@@ -1,42 +1,26 @@
 package vista.gui;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
+import javax.swing.border.EmptyBorder;
 
 import controlador.Coordinador;
-import modelo.vo.MascotaVo;
 import modelo.vo.PersonaVo;
-import modelo.vo.PersonasProductosVo;
 import modelo.vo.ProductoVo;
 
-import javax.swing.JSeparator;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-
-public class RegistrarProductosGui extends JDialog implements ActionListener{
-
+public class ActualizarProducto extends JDialog implements ActionListener{
 	private Coordinador miCoordinador;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtNombre;
 	private JTextField txtPrecio;
 	private JButton btnCancelar;
-	private JButton btnRegistrar;
+	private JButton btnBuscar;
+	private JButton btnActualizar;
 	private JTextField txtIdProducto;
 	private JTextField txtIdPersona;
 
@@ -47,12 +31,12 @@ public class RegistrarProductosGui extends JDialog implements ActionListener{
 	 * @param ventanaPrincipal 
 	 * @param documento 
 	 */
-	public RegistrarProductosGui(VentanaPrincipal ventanaPrincipal, boolean modal) {
+	public ActualizarProducto(VentanaPrincipal ventanaPrincipal, boolean modal) {
 		super(ventanaPrincipal,modal);
-		setSize( 412, 253);
+		setSize( 412, 266);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
-		setTitle("Gestion de Mascotas");
+		setTitle("Consulta de Productos");
 		iniciarComponentes();
 		
 		
@@ -64,7 +48,7 @@ public class RegistrarProductosGui extends JDialog implements ActionListener{
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		JLabel lblTitulo = new JLabel("GESTIONAR PRODUCTOS");
+		JLabel lblTitulo = new JLabel("ACTUALIZAR PRODUCTO");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Tw Cen MT", Font.BOLD, 20));
 		lblTitulo.setBounds(10, 10, 372, 28);
@@ -72,101 +56,127 @@ public class RegistrarProductosGui extends JDialog implements ActionListener{
 				
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel.setBounds(10, 49, 380, 154);
+		panel.setBounds(10, 38, 380, 178);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(25, 66, 71, 21);
+		lblNombre.setBounds(24, 96, 71, 21);
 		panel.add(lblNombre);
 		
 		txtNombre = new JTextField();
 		txtNombre.setColumns(10);
-		txtNombre.setBounds(89, 66, 86, 20);
+		txtNombre.setBounds(89, 96, 86, 20);
 		panel.add(txtNombre);
 		
 		JLabel lblPrecio = new JLabel("Precio:");
-		lblPrecio.setBounds(211, 66, 71, 21);
+		lblPrecio.setBounds(209, 96, 71, 21);
 		panel.add(lblPrecio);
 		
 		txtPrecio = new JTextField();
 		txtPrecio.setColumns(10);
-		txtPrecio.setBounds(269, 66, 86, 20);
+		txtPrecio.setBounds(269, 96, 86, 20);
 		panel.add(txtPrecio);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(24, 97, 331, 12);
+		separator.setBounds(24, 128, 331, 12);
 		panel.add(separator);
 		
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(this);
-		btnCancelar.setBounds(269, 120, 89, 23);
+		btnCancelar.setBounds(266, 144, 89, 23);
 		panel.add(btnCancelar);
+	
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(this);
+		btnActualizar.setBounds(146, 144, 100, 23);
+		panel.add(btnActualizar);
 		
-		btnRegistrar = new JButton("Registrar");
-		btnRegistrar.setBounds(173, 120, 89, 23);
-		btnRegistrar.addActionListener(this);
-		panel.add(btnRegistrar);
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.setBounds(266, 19, 89, 23);
+		btnBuscar.addActionListener(this);
+		panel.add(btnBuscar);
 		
 		JLabel lblidProducto = new JLabel("Id Producto: ");
-		lblidProducto.setBounds(25, 23, 71, 14);
+		lblidProducto.setBounds(89, 23, 71, 14);
 		panel.add(lblidProducto);
 		
 		txtIdProducto = new JTextField();
-		txtIdProducto.setBounds(89, 20, 86, 20);
+		txtIdProducto.setBounds(170, 20, 86, 20);
 		panel.add(txtIdProducto);
 		txtIdProducto.setColumns(10);
 		
 		JLabel lblIdPersona = new JLabel("Id Persona: ");
-		lblIdPersona.setBounds(191, 23, 71, 14);
+		lblIdPersona.setBounds(24, 67, 71, 14);
 		panel.add(lblIdPersona);
 		
 		txtIdPersona = new JTextField();
 		txtIdPersona.setColumns(10);
-		txtIdPersona.setBounds(269, 20, 86, 20);
+		txtIdPersona.setBounds(89, 64, 86, 20);
 		panel.add(txtIdPersona);
 	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
-		if(e.getSource()==btnRegistrar) {
+		if(e.getSource()==btnBuscar) {
 			
+			Long idProducto = Long.parseLong(txtIdProducto.getText());
+			ProductoVo miProducto = miCoordinador.consultarProducto(idProducto);
+			
+			if(miProducto!=null) {
+				
+				txtIdPersona.setText(miProducto.getIdPersona()+"");
+				txtNombre.setText(miProducto.getNombreProducto());
+				txtPrecio.setText(miProducto.getPrecioProducto()+"");
+				
+			}else {
+				JOptionPane.showMessageDialog(null, "Producto no existente");
+			}
+			
+		}else if(e.getSource()==btnCancelar) {
+			this.dispose();
+		}else if(e.getSource()==btnActualizar) {
 			ProductoVo miProducto = new ProductoVo();
 			
 			miProducto.setIdProducto(Long.parseLong(txtIdProducto.getText()));
 			miProducto.setNombreProducto(txtNombre.getText());
 			miProducto.setPrecioProducto(Double.parseDouble(txtPrecio.getText()));
 			
-			PersonasProductosVo miPproducto = new PersonasProductosVo();
-			miPproducto.setPersonaId(Long.parseLong(txtIdPersona.getText()));
-			miPproducto.setProductoId(Long.parseLong(txtIdProducto.getText()));
-			PersonaVo miPersona = miCoordinador.setConsultarPersonaGui(miPproducto.getPersonaId());
+			System.out.println(txtIdProducto.getText());
+			System.out.println(txtNombre.getText());
+			System.out.println(txtPrecio.getText());
+			txtIdPersona.getText();
+			
+			//PersonaVo miPersona = miCoordinador.setConsultarPersonaGui(miProducto.getIdPersona());
 			
 			if(miPersona!=null) {
 				
-				String res = miCoordinador.registrarProducto(miProducto);
-				String result = miCoordinador.registrarPproducto();
+				String res = miCoordinador.actualizarProducto(miProducto);
+				
 				if(res.equals("ok")) {
-					JOptionPane.showMessageDialog(null, "Registro Exitoso!!");
+					JOptionPane.showMessageDialog(null, "Actualizacion exitosa!!");
 				}else {
 					JOptionPane.showMessageDialog(null, res, "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				
 			}else {
-				JOptionPane.showMessageDialog(null, "Persona no existente");
+				JOptionPane.showMessageDialog(null, "Producto no existente");
 			}
-			
-		}else if(e.getSource()==btnCancelar) {
-			this.dispose();
 		}
-		
 	}
 
 
 	public void setCoordinador(Coordinador miCoordinador) {
 		// TODO Auto-generated method stub
 		this.miCoordinador = miCoordinador;
+	}
+	
+	public void vaciar() {
+		txtIdPersona.setText("");
+		txtIdProducto.setText("");
+		txtNombre.setText("");
+		txtPrecio.setText("");
 	}
 }
