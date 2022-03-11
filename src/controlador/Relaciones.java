@@ -9,6 +9,7 @@ import vista.gui.ActualizarPersonaGui;
 import vista.gui.ConsultarPersonaGui;
 import vista.gui.ListarPersonas;
 import vista.gui.EliminarPersonaGui;
+import vista.gui.ListarMascotasGui;
 import vista.gui.RegistrarMascotasGui;
 import vista.gui.RegistrarPersonasGui;
 import vista.gui.RegistrarProductosGui;
@@ -34,6 +35,7 @@ public class Relaciones {
 		EliminarPersonaGui miEliminarPersonaGui;
 		ActualizarPersonaGui miActualizarPersonaGui;
 		ListarPersonas miListarPersonas;
+		ListarMascotasGui miListarMascotas;
 		
 		//se instacian por unica ocasion las clases declaradas
 		
@@ -52,6 +54,7 @@ public class Relaciones {
 		miProductoDao = new ProductoDao();
 		miPersonaProductoDao = new PersonaProductoDao();
 		miListarPersonas = new ListarPersonas();
+		miListarMascotas = new ListarMascotasGui();
 		
 		//Se establece la relacion entre el coordinador y cada instancia unica
 		
@@ -70,6 +73,7 @@ public class Relaciones {
 		miCoordinador.setProductoDao(miProductoDao);
 		miCoordinador.setPersonaProductoDao(miPersonaProductoDao);
 		miCoordinador.setMiListarPersonas(miListarPersonas);
+		miCoordinador.setMiListarMascotas(miListarMascotas);
 		
 		//a cada clase unica se le asigna la unica instancia del coordinador
 		
@@ -86,6 +90,7 @@ public class Relaciones {
 		miProductoDao.setCoordinador(miCoordinador);
 		miPersonaProductoDao.setCoordinador(miCoordinador);
 		miListarPersonas.setMiCoordinador(miCoordinador);
+		miListarMascotas.setMiCoordinador(miCoordinador);
 		
 		miVentanaPrincipal.setVisible(true);
 	}
