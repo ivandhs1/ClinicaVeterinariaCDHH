@@ -163,8 +163,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 			miCoordinador.mostrarVentanaRegistroMascotas();
 		}
 		if (e.getSource()==itemRegistroProductos) {
-			RegistrarProductosGui RegistrarProductos=new RegistrarProductosGui(this, true);
-			RegistrarProductos.setVisible(true);
+			miCoordinador.mostrarVentanRegistroProducto();
 		}
 		if (e.getSource()==itemConsultarPersonas) {
 			miCoordinador.mostrarVentanaConsultaPersonas();
@@ -176,6 +175,21 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 		}
 		if(e.getSource()==itemListarPersonas) {
 			miCoordinador.mostrarListarPersonas();
+		}
+		if(e.getSource()==itemConsultarMascotas) {
+			miCoordinador.mostrarVentanaConsultarMascota();
+		}
+		if(e.getSource()==itemEliminarMascotas) {
+			miCoordinador.mostrarVentanaEliminarMascota();
+		}
+		if(e.getSource()==itemListarMascotas) {
+			miCoordinador.mostrarListarMascotas();
+		}
+		if(e.getSource()==itemActualizarMascotas) {
+			miCoordinador.mostrarActualizarMascotas();
+		}
+		if(e.getSource()==itemConsultaProductos) {
+			miCoordinador.mostrarVentanaConsultarProducto();
 		}
 	}
 

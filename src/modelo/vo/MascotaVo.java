@@ -7,7 +7,16 @@ public class MascotaVo {
 	private String raza;
 	private String colorMascota;
 	private String sexo;
+	private Long idDueno;
 	
+	public Long getIdDueno() {
+		return idDueno;
+	}
+
+	public void setIdDueno(Long idDueno) {
+		this.idDueno = idDueno;
+	}
+
 	public MascotaVo() {
 		
 	}

@@ -22,7 +22,7 @@ create table nacimiento(
 );
 
 create table mascotas(
-	id_mascotas BIGINT(20) primary key not null auto_increment,
+	id_mascotas int primary key not null,
 	color varchar(45),
 	nombre varchar(45),
 	raza varchar(45),
