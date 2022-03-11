@@ -1,6 +1,7 @@
 package vista.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -11,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -100,10 +102,12 @@ public class ConsultarProductoGui extends JDialog implements ActionListener{
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(this);
 		btnCancelar.setBounds(266, 144, 89, 23);
+		btnCancelar.setBackground(new Color(255, 192, 203));
 		panel.add(btnCancelar);
 		
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.setBounds(266, 19, 89, 23);
+		btnBuscar.setBackground(SystemColor.activeCaption);
 		btnBuscar.addActionListener(this);
 		panel.add(btnBuscar);
 		
@@ -154,5 +158,14 @@ public class ConsultarProductoGui extends JDialog implements ActionListener{
 	public void setCoordinador(Coordinador miCoordinador) {
 		// TODO Auto-generated method stub
 		this.miCoordinador = miCoordinador;
+	}
+
+
+	public void limpiar() {
+		// TODO Auto-generated method stub
+		txtIdPersona.setText("");
+		txtIdProducto.setText("");
+		txtNombre.setText("");
+		txtPrecio.setText("");
 	}
 }

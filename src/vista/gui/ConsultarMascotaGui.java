@@ -1,7 +1,9 @@
 package vista.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -104,6 +106,7 @@ public class ConsultarMascotaGui extends JDialog implements ActionListener{
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(this);
 		btnCancelar.setBounds(269, 198, 89, 23);
+		btnCancelar.setBackground(new Color(255, 192, 203));
 		panel.add(btnCancelar);
 		
 		JLabel lblSexo = new JLabel("Sexo:");
@@ -116,7 +119,8 @@ public class ConsultarMascotaGui extends JDialog implements ActionListener{
 		
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.setBounds(266, 16, 89, 23);
-		btnBuscar.addActionListener(this);
+		btnBuscar.addActionListener(this);	
+		btnBuscar.setBackground(SystemColor.activeCaption);
 		panel.add(btnBuscar);
 		
 		JLabel lblIdMascota = new JLabel("Id Mascota:");
@@ -169,4 +173,17 @@ public class ConsultarMascotaGui extends JDialog implements ActionListener{
 		// TODO Auto-generated method stub
 		this.miCoordinador = miCoordinador;
 	}
+
+
+	public void limpiar() {
+		// TODO Auto-generated method stub
+		txtIdDueno.setText("");
+		txtIdMascota.setText("");
+		txtNombre.setText("");
+		txtRaza.setText("");
+		txtSexo.setText("");
+		txtColor.setText("");
+	}
+
+
 }

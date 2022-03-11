@@ -222,4 +222,20 @@ public class ConsultarPersonaGui extends JDialog implements ActionListener {
 		}
 	}
 
+	public void limpiar() {
+		// TODO Auto-generated method stub
+		txtDocumento.setEnabled(true);
+		txtDocumento.setText("");
+		txtNombre.setText("");
+		txtProfesion.setText("");
+		txtTelefono.setText("");
+		txtTipo.setText("");
+		txtAnnio.setText("");
+		txtMes.setText("");
+		txtDia.setText("");
+		txtDepartamento.setText("");
+		txtPais.setText("");
+		txtCiudad.setText("");
+	}
+
 }
