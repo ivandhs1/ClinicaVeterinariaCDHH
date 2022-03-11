@@ -180,6 +180,35 @@ public class MascotaDao {
 		
 		return resultado;
 	}
+	public String eliminarMascotaPorDuenno(PersonaVo p) {
+
+		String resultado="";
+		Connection connection = null;
+		Conexion miConexion = new Conexion();
+		PreparedStatement preStatement = null;
+		connection = miConexion.getConnection();
+		
+		String consulta="DELETE FROM mascotas WHERE persona_id = ?";
+		
+		try {
+			
+			preStatement = connection.prepareStatement(consulta);
+			
+			preStatement.setLong(1, p.getIdPersona());
+			
+			preStatement.executeUpdate();
+			
+			resultado="ok";
+			
+			miConexion.desconectar();	
+			
+		} catch (SQLException e) {
+			System.out.println("Error en la eliminacion de datos de mascota:"+e);
+			resultado="No Logrado";
+		}
+		
+		return resultado;
+	}
 
 	public ArrayList<MascotaVo> imprimirMascotas() {
 		ArrayList<MascotaVo> mascotas = new ArrayList<MascotaVo>();
@@ -225,5 +254,7 @@ public class MascotaDao {
 		}
 		return mascotas;
 	}
+
+	
 
 }
