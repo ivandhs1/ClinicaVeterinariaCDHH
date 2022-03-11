@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -103,6 +104,7 @@ public class ActualizarMascotaGui extends JDialog implements ActionListener{
 		
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(this);
+		btnCancelar.setBackground(new Color(255, 192, 203));
 		btnCancelar.setBounds(269, 198, 89, 23);
 		panel.add(btnCancelar);
 		
@@ -117,6 +119,7 @@ public class ActualizarMascotaGui extends JDialog implements ActionListener{
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.setBounds(266, 16, 89, 23);
 		btnBuscar.addActionListener(this);
+		btnBuscar.setBackground(SystemColor.activeCaption);
 		panel.add(btnBuscar);
 		
 		JLabel lblIdMascota = new JLabel("Id Mascota:");
@@ -140,6 +143,7 @@ public class ActualizarMascotaGui extends JDialog implements ActionListener{
 		btnActualizar = new JButton("Actualizar:");
 		btnActualizar.setBackground(new Color(255, 192, 203));
 		btnActualizar.setBounds(158, 198, 101, 23);
+		btnActualizar.setBackground(new Color(152, 251, 152));
 		btnActualizar.addActionListener(this);
 		panel.add(btnActualizar);
 

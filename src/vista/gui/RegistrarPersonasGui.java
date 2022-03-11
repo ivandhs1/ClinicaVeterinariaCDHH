@@ -235,6 +235,7 @@ public class RegistrarPersonasGui extends JDialog implements ActionListener{
 				String res=miCoordinador.registrarPersona(miPersona);
 				if(res.equals("ok")) {
 					JOptionPane.showMessageDialog(null, "Registro Exitoso!");
+					limpiar();
 				}else {
 					JOptionPane.showMessageDialog(null, res, "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
@@ -246,6 +247,7 @@ public class RegistrarPersonasGui extends JDialog implements ActionListener{
 		}else if(e.getSource()==btnAgregarMascotas) {
 			miCoordinador.mostrarVentanaRegistroMascotas(Long.parseLong(txtDocumento.getText()));
 		}else if(e.getSource()==btnCancelar) {
+			limpiar();
 			this.dispose();
 		}
 	}
@@ -255,4 +257,21 @@ public class RegistrarPersonasGui extends JDialog implements ActionListener{
 		// TODO Auto-generated method stub
 		this.miCoordinador = miCoordinador;
 	}
+	
+	public void limpiar() {
+		// TODO Auto-generated method stub
+		txtDocumento.setEnabled(true);
+		txtDocumento.setText("");
+		txtNombre.setText("");
+		txtProfesion.setText("");
+		txtTelefono.setText("");
+		txtTipo.setText("");
+		txtAnio.setText("");
+		txtMes.setText("");
+		txtDia.setText("");
+		txtDepartamento.setText("");
+		txtPais.setText("");
+		txtCiudad.setText("");
+	}
+	
 }
