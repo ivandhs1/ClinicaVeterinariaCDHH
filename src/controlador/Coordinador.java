@@ -10,9 +10,11 @@ import modelo.dao.ProductoDao;
 import modelo.vo.MascotaVo;
 import modelo.vo.NacimientoVo;
 import modelo.vo.PersonaVo;
+import vista.gui.ActualizarMascotaGui;
 import vista.gui.ActualizarPersonaGui;
 import vista.gui.ConsultarMascotaGui;
 import vista.gui.ConsultarPersonaGui;
+import vista.gui.EliminarMascotaGui;
 import vista.gui.ListarPersonas;
 import vista.gui.EliminarPersonaGui;
 import vista.gui.ListarMascotasGui;
@@ -38,6 +40,8 @@ public class Coordinador {
 	ConsultarMascotaGui miConsultarMascotaGui;
 	private EliminarPersonaGui miEliminarPersonaGui;
 	private ListarMascotasGui miListarMascotas;
+	private EliminarMascotaGui miEliminarMascotaGui;
+	private ActualizarMascotaGui miActualizarMascotaGui;
 
 	public void setVentanaPrincipal(VentanaPrincipal miVentanaPrincipal) {
 		this.miVentanaPrincipal = miVentanaPrincipal;
@@ -123,10 +127,19 @@ public class Coordinador {
 		miEliminarPersonaGui.limpiar();
 
 	}
+	public void mostrarVentanaEliminarMascota() {
+		miEliminarMascotaGui.setVisible(true);
+		miEliminarMascotaGui.limpiar();
+	}
 
 	public void mostrarActualizarPersonas() {
 		miActualizarPersonaGui.setVisible(true);
 		miActualizarPersonaGui.limpiar();
+	}
+	public void mostrarActualizarMascotas() {
+		miActualizarMascotaGui.setVisible(true);
+		miActualizarMascotaGui.limpiar();
+		
 	}
 
 	public String registrarPersona(PersonaVo miPersona) {
@@ -158,6 +171,9 @@ public class Coordinador {
 		// TODO Auto-generated method stub
 		return miPersonaDao.actualizarPersona(p);
 	}
+	public String actualizarMascota(MascotaVo p) {
+		return miMascotaDao.actualizarMascota(p);
+	}
 
 	public void mostrarListarPersonas() {
 		ArrayList<PersonaVo> personas = miPersonaDao.imprimirPersonas();
@@ -182,7 +198,8 @@ public class Coordinador {
 	public void setMiActualizarPersonaGui(ActualizarPersonaGui miActualizarPersonaGui) {
 		this.miActualizarPersonaGui = miActualizarPersonaGui;
 	}
-
+	
+	
 	public void setEliminarPersonaGui(EliminarPersonaGui miEliminarPersonaGui) {
 		this.miEliminarPersonaGui = miEliminarPersonaGui;
 
@@ -190,6 +207,9 @@ public class Coordinador {
 
 	public String eliminarPersona(PersonaVo p) {
 		return miPersonaDao.eliminarPersona(p);
+	}
+	public String eliminarMascota(MascotaVo p) {
+		return miMascotaDao.eliminarMascota(p);
 	}
 
 	public void setMiListarMascotas(ListarMascotasGui miListarMascotas) {
@@ -211,5 +231,25 @@ public class Coordinador {
 		// TODO Auto-generated method stub
 		return miMascotaDao.consultarMascota(idMascota);
 	}
+
+	public void setMiEliminarMascotaGui(EliminarMascotaGui miEliminarMascotaGui) {
+		this.miEliminarMascotaGui=miEliminarMascotaGui;
+		
+	}
+
+	public void setMiActualizarMascotaGui(ActualizarMascotaGui miActualizarMascotaGui) {
+		this.miActualizarMascotaGui=miActualizarMascotaGui;
+		
+	}
+
+	
+
+	
+
+	
+
+	
+
+	
 
 }

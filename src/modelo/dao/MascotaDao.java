@@ -114,12 +114,71 @@ public class MascotaDao {
 
 	}
 
-	public void actualizarMascota() {
+	public String actualizarMascota(MascotaVo p) {
 
+		String resultado="";
+		Connection connection = null;
+		Conexion miConexion = new Conexion();
+		PreparedStatement preStatement = null;
+		connection = miConexion.getConnection();
+		
+		String consulta="UPDATE mascotas "
+				+ " SET color = ?, nombre = ?, raza = ?, sexo = ?"
+				+ " WHERE id_mascotas =?";
+		
+		try {
+			
+			preStatement = connection.prepareStatement(consulta);
+			
+			preStatement.setString(1, p.getColorMascota());
+			preStatement.setString(2, p.getNombre());
+			preStatement.setString(3, p.getRaza());
+			preStatement.setString(4, p.getSexo());
+			preStatement.setLong(5, p.getIdMascota());
+			
+			preStatement.executeUpdate();
+			
+			resultado="ok";
+			
+			miConexion.desconectar();	
+			
+		} catch (SQLException e) {
+			System.out.println("Error en la inserccion de datos de mascota:"+e);
+			resultado="No Logrado";
+		}
+		
+		return resultado;
+		
 	}
 
-	public void eliminarMascota() {
+	public String eliminarMascota(MascotaVo p) {
 
+		String resultado="";
+		Connection connection = null;
+		Conexion miConexion = new Conexion();
+		PreparedStatement preStatement = null;
+		connection = miConexion.getConnection();
+		
+		String consulta="DELETE FROM mascotas WHERE id_mascotas = ?";
+		
+		try {
+			
+			preStatement = connection.prepareStatement(consulta);
+			
+			preStatement.setLong(1, p.getIdMascota());
+			
+			preStatement.executeUpdate();
+			
+			resultado="ok";
+			
+			miConexion.desconectar();	
+			
+		} catch (SQLException e) {
+			System.out.println("Error en la eliminacion de datos de mascota:"+e);
+			resultado="No Logrado";
+		}
+		
+		return resultado;
 	}
 
 	public ArrayList<MascotaVo> imprimirMascotas() {
@@ -150,7 +209,7 @@ public class MascotaDao {
 					miMascota.setNombre(result.getString("nombre"));
 					miMascota.setRaza(result.getString("raza"));
 					miMascota.setSexo(result.getString("sexo"));
-					miMascota.setPersonaId(result.getString("persona_id"));
+					miMascota.setIdDueno(result.getLong("persona_id"));
 
 					mascotas.add(miMascota);
 				}

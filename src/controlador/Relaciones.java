@@ -5,9 +5,11 @@ import modelo.dao.NacimientoDao;
 import modelo.dao.PersonaDao;
 import modelo.dao.PersonaProductoDao;
 import modelo.dao.ProductoDao;
+import vista.gui.ActualizarMascotaGui;
 import vista.gui.ActualizarPersonaGui;
 import vista.gui.ConsultarMascotaGui;
 import vista.gui.ConsultarPersonaGui;
+import vista.gui.EliminarMascotaGui;
 import vista.gui.ListarPersonas;
 import vista.gui.EliminarPersonaGui;
 import vista.gui.ListarMascotasGui;
@@ -38,6 +40,8 @@ public class Relaciones {
 		ListarPersonas miListarPersonas;
 		ListarMascotasGui miListarMascotas;
 		ConsultarMascotaGui miConsultarMascotaGui;
+		EliminarMascotaGui miEliminarMascotaGui;
+		ActualizarMascotaGui miActualizarMascotaGui;
 
 		// se instacian por unica ocasion las clases declaradas
 
@@ -49,6 +53,8 @@ public class Relaciones {
 		miEliminarPersonaGui = new EliminarPersonaGui(miVentanaPrincipal, true);
 		miActualizarPersonaGui = new ActualizarPersonaGui(miVentanaPrincipal, true);
 		miConsultarMascotaGui = new ConsultarMascotaGui(miVentanaPrincipal, true);
+		miEliminarMascotaGui  = new EliminarMascotaGui(miVentanaPrincipal, true);
+		miActualizarMascotaGui = new ActualizarMascotaGui(miVentanaPrincipal, true);
 
 		miCoordinador = new Coordinador();
 		miPersonaDao = new PersonaDao();
@@ -58,6 +64,7 @@ public class Relaciones {
 		miPersonaProductoDao = new PersonaProductoDao();
 		miListarPersonas = new ListarPersonas();
 		miListarMascotas = new ListarMascotasGui();
+		
 
 		// Se establece la relacion entre el coordinador y cada instancia unica
 
@@ -78,6 +85,8 @@ public class Relaciones {
 		miCoordinador.setMiListarPersonas(miListarPersonas);
 		miCoordinador.setMiListarMascotas(miListarMascotas);
 		miCoordinador.setConsultarMascotaGui(miConsultarMascotaGui);
+		miCoordinador.setMiEliminarMascotaGui(miEliminarMascotaGui);
+		miCoordinador.setMiActualizarMascotaGui(miActualizarMascotaGui);
 
 		// a cada clase unica se le asigna la unica instancia del coordinador
 
@@ -96,6 +105,8 @@ public class Relaciones {
 		miPersonaProductoDao.setCoordinador(miCoordinador);
 		miListarPersonas.setMiCoordinador(miCoordinador);
 		miListarMascotas.setMiCoordinador(miCoordinador);
+		miEliminarMascotaGui.setMiCoordinador(miCoordinador);
+		miActualizarMascotaGui.setMiCoordinador(miCoordinador);
 
 		miVentanaPrincipal.setVisible(true);
 	}

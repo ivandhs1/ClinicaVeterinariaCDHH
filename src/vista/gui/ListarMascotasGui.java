@@ -75,7 +75,7 @@ public class ListarMascotasGui extends JDialog {
 				cuadro[i][2]=mascotas.get(i).getNombre();
 				cuadro[i][3]=mascotas.get(i).getRaza();
 				cuadro[i][4]=mascotas.get(i).getSexo()+"";
-				cuadro[i][5]=mascotas.get(i).getPersonaId;
+				cuadro[i][5]=mascotas.get(i).getIdDueno()+"";
 			}
 		}else {
 			 cuadro = new String [14][9];

@@ -225,8 +225,6 @@ public class ActualizarPersonaGui extends JDialog implements ActionListener {
 			}
 
 		}else if(e.getSource()==btnActualizar) {
-			
-			
 			p.setIdPersona(Long.parseLong(txtDocumento.getText()));
 			p.setNombre(txtNombre.getText());
 			p.setProfesion(txtProfesion.getText());
