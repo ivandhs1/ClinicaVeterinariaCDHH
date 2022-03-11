@@ -10,9 +10,12 @@ import modelo.dao.ProductoDao;
 import modelo.vo.NacimientoVo;
 import modelo.vo.PersonaVo;
 import vista.gui.ActualizarPersonaGui;
+import vista.gui.ActualizarProducto;
 import vista.gui.ConsultarPersonaGui;
 import vista.gui.ListarPersonas;
+import vista.gui.ListarProductos;
 import vista.gui.EliminarPersonaGui;
+import vista.gui.EliminarProducto;
 import vista.gui.RegistrarMascotasGui;
 import vista.gui.RegistrarPersonasGui;
 import vista.gui.RegistrarProductosGui;
@@ -32,6 +35,9 @@ public class Coordinador {
 	ProductoDao miProductoDao;
 	PersonaProductoDao miPersonaProductoDao;
 	ListarPersonas miListarPersonas;
+	ActualizarProducto miActualizarProducto;
+	EliminarProducto miEliminarProducto;
+	ListarProductos miListarProductos;
 	private EliminarPersonaGui miEliminarPersonaGui;
 
 	public void setVentanaPrincipal(VentanaPrincipal miVentanaPrincipal) {
@@ -157,6 +163,18 @@ public class Coordinador {
 	public void setMiListarPersonas(ListarPersonas miListarPersonas) {
 		this.miListarPersonas = miListarPersonas;
 	}
+	
+	public void setMiActualizarProducto(ActualizarProducto miActualizarProducto) {
+		this.miActualizarProducto = miActualizarProducto;
+	}
+	
+	public void setMiEliminarProducto(EliminarProducto miEliminarProdcutos) {
+		this.miEliminarProducto = miEliminarProdcutos;
+	}
+	
+	public void setMiListarProductos(ListarProductos miListarProductos) {
+		this.miListarProductos = miListarProductos;
+	}
 
 	public void setMiConsultarPersonasGui(ConsultarPersonaGui miConsultarPersonasGui) {
 		this.miConsultarPersonasGui = miConsultarPersonasGui;
@@ -173,5 +191,17 @@ public class Coordinador {
 
 	public String eliminarPersona(PersonaVo p) {
 		return miPersonaDao.eliminarPersona(p);
+	}
+	
+	public void mostrarActualizarProductos() {
+		miActualizarProducto.setVisible(true);
+	}
+	
+	public void mostrarEliminarProductos() {
+		miEliminarProducto.setVisible(true);
+	}
+	
+	public void mostrarListarProductos() {
+		miListarProductos.setVisible(true);
 	}
 }

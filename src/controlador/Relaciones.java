@@ -6,9 +6,12 @@ import modelo.dao.PersonaDao;
 import modelo.dao.PersonaProductoDao;
 import modelo.dao.ProductoDao;
 import vista.gui.ActualizarPersonaGui;
+import vista.gui.ActualizarProducto;
 import vista.gui.ConsultarPersonaGui;
 import vista.gui.ListarPersonas;
+import vista.gui.ListarProductos;
 import vista.gui.EliminarPersonaGui;
+import vista.gui.EliminarProducto;
 import vista.gui.RegistrarMascotasGui;
 import vista.gui.RegistrarPersonasGui;
 import vista.gui.RegistrarProductosGui;
@@ -34,6 +37,9 @@ public class Relaciones {
 		EliminarPersonaGui miEliminarPersonaGui;
 		ActualizarPersonaGui miActualizarPersonaGui;
 		ListarPersonas miListarPersonas;
+		ActualizarProducto miActualizarProducto;
+		EliminarProducto miEliminarProducto;
+		ListarProductos miListarProductos;
 		
 		//se instacian por unica ocasion las clases declaradas
 		
@@ -43,6 +49,11 @@ public class Relaciones {
 		miRegistrarProductosGui = new RegistrarProductosGui(miVentanaPrincipal, true);
 		miConsultarPersonaGui = new ConsultarPersonaGui(miVentanaPrincipal, true);
 		miEliminarPersonaGui = new EliminarPersonaGui(miVentanaPrincipal, true);
+		miListarPersonas = new ListarPersonas();
+		miActualizarProducto = new ActualizarProducto(miVentanaPrincipal, true);
+		miEliminarProducto = new EliminarProducto(miVentanaPrincipal, true);
+		miListarProductos = new ListarProductos();
+		
 
 		miActualizarPersonaGui = new ActualizarPersonaGui(miVentanaPrincipal, true);
 		miCoordinador = new Coordinador();
@@ -51,7 +62,7 @@ public class Relaciones {
 		miNacimientoDao = new NacimientoDao();
 		miProductoDao = new ProductoDao();
 		miPersonaProductoDao = new PersonaProductoDao();
-		miListarPersonas = new ListarPersonas();
+		
 		
 		//Se establece la relacion entre el coordinador y cada instancia unica
 		
@@ -70,6 +81,9 @@ public class Relaciones {
 		miCoordinador.setProductoDao(miProductoDao);
 		miCoordinador.setPersonaProductoDao(miPersonaProductoDao);
 		miCoordinador.setMiListarPersonas(miListarPersonas);
+		miCoordinador.setMiActualizarProducto(miActualizarProducto);
+		miCoordinador.setMiEliminarProducto(miEliminarProducto);
+		miCoordinador.setMiListarProductos(miListarProductos);
 		
 		//a cada clase unica se le asigna la unica instancia del coordinador
 		
@@ -86,6 +100,9 @@ public class Relaciones {
 		miProductoDao.setCoordinador(miCoordinador);
 		miPersonaProductoDao.setCoordinador(miCoordinador);
 		miListarPersonas.setMiCoordinador(miCoordinador);
+		miActualizarProducto.setCoordinador(miCoordinador);
+		miEliminarProducto.setCoordinador(miCoordinador);
+		miListarProductos.setMiCoordinador(miCoordinador);
 		
 		miVentanaPrincipal.setVisible(true);
 	}

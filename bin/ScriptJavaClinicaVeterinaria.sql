@@ -1,5 +1,7 @@
 create database bd_clinica;
 
+
+
 use bd_clinica;
 
 create table persona(
@@ -20,7 +22,7 @@ create table nacimiento(
 );
 
 create table mascotas(
-	id_mascotas BIGINT(20) primary key not null,
+	id_mascotas BIGINT(20) primary key not null auto_increment,
 	color varchar(45),
 	nombre varchar(45),
 	raza varchar(45),
@@ -30,7 +32,7 @@ create table mascotas(
 
 create table productos 
 (
-	id_producto int primary key not null,
+	id_producto int primary key not null auto_increment,
     nombre_producto varchar(45),
     precio_producto double
 );
@@ -79,3 +81,4 @@ ADD CONSTRAINT `fk_producto_id_id_producto`
   REFERENCES `bd_clinica`.`productos` (`id_producto`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+  
