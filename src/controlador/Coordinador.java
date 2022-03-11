@@ -11,6 +11,7 @@ import modelo.vo.MascotaVo;
 import modelo.vo.NacimientoVo;
 import modelo.vo.PersonaVo;
 import vista.gui.ActualizarPersonaGui;
+import vista.gui.ConsultarMascotaGui;
 import vista.gui.ConsultarPersonaGui;
 import vista.gui.ListarPersonas;
 import vista.gui.EliminarPersonaGui;
@@ -34,6 +35,7 @@ public class Coordinador {
 	ProductoDao miProductoDao;
 	PersonaProductoDao miPersonaProductoDao;
 	ListarPersonas miListarPersonas;
+	ConsultarMascotaGui miConsultarMascotaGui;
 	private EliminarPersonaGui miEliminarPersonaGui;
 	private ListarMascotasGui miListarMascotas;
 
@@ -64,6 +66,11 @@ public class Coordinador {
 	public void setActualizarPersonaGui(ActualizarPersonaGui miActualizarPersonaGui) {
 		// TODO Auto-generated method stub
 		this.miActualizarPersonaGui = miActualizarPersonaGui;
+	}
+
+	public void setConsultarMascotaGui(ConsultarMascotaGui miConsultarMascotaGui) {
+		// TODO Auto-generated method stub
+		this.miConsultarMascotaGui = miConsultarMascotaGui;
 	}
 
 	public void setPersonaDao(PersonaDao miPersonaDao) {
@@ -100,7 +107,7 @@ public class Coordinador {
 		// TODO Auto-generated method stub
 		miRegistrarMascotasGui.setVisible(true);
 	}
-	
+
 	public void mostrarVentanaRegistroMascotas(long id) {
 		miRegistrarMascotasGui.atraparid(id);
 		miRegistrarMascotasGui.setVisible(true);
@@ -110,6 +117,7 @@ public class Coordinador {
 		// TODO Auto-generated method stub
 		miConsultarPersonasGui.setVisible(true);
 	}
+
 	public void mostrarVentanaEliminarPersonas() {
 		miEliminarPersonaGui.setVisible(true);
 		miEliminarPersonaGui.limpiar();
@@ -141,7 +149,7 @@ public class Coordinador {
 		return miNacimientoDao.consultarNacimiento(idNacimiento);
 
 	}
-	
+
 	public String actualizarNacimiento(NacimientoVo miNacimiento) {
 		return miNacimientoDao.actualizarNacimiento(miNacimiento);
 	}
@@ -162,6 +170,7 @@ public class Coordinador {
 		miListarMascotas.setVisible(true);
 		miListarMascotas.llenar(mascotas);
 	}
+
 	public void setMiListarPersonas(ListarPersonas miListarPersonas) {
 		this.miListarPersonas = miListarPersonas;
 	}
@@ -172,11 +181,11 @@ public class Coordinador {
 
 	public void setMiActualizarPersonaGui(ActualizarPersonaGui miActualizarPersonaGui) {
 		this.miActualizarPersonaGui = miActualizarPersonaGui;
-	} 
-	
+	}
+
 	public void setEliminarPersonaGui(EliminarPersonaGui miEliminarPersonaGui) {
-		this.miEliminarPersonaGui=miEliminarPersonaGui;
-		
+		this.miEliminarPersonaGui = miEliminarPersonaGui;
+
 	}
 
 	public String eliminarPersona(PersonaVo p) {
@@ -184,7 +193,23 @@ public class Coordinador {
 	}
 
 	public void setMiListarMascotas(ListarMascotasGui miListarMascotas) {
-		this.miListarMascotas=miListarMascotas;
-		
+		this.miListarMascotas = miListarMascotas;
+
 	}
+
+	public String RegistrarMascotasGui(MascotaVo miMascota) {
+		// TODO Auto-generated method stub
+		return miMascotaDao.registrarMascota(miMascota);
+	}
+
+	public void mostrarVentanaConsultarMascota() {
+		// TODO Auto-generated method stub
+		miConsultarMascotaGui.setVisible(true);
+	}
+
+	public MascotaVo consultarMascota(Long idMascota) {
+		// TODO Auto-generated method stub
+		return miMascotaDao.consultarMascota(idMascota);
+	}
+
 }
