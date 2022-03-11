@@ -10,10 +10,12 @@ import modelo.dao.ProductoDao;
 import modelo.vo.MascotaVo;
 import modelo.vo.NacimientoVo;
 import modelo.vo.PersonaVo;
+import modelo.vo.ProductoVo;
 import vista.gui.ActualizarMascotaGui;
 import vista.gui.ActualizarPersonaGui;
 import vista.gui.ConsultarMascotaGui;
 import vista.gui.ConsultarPersonaGui;
+import vista.gui.ConsultarProductoGui;
 import vista.gui.EliminarMascotaGui;
 import vista.gui.ListarPersonas;
 import vista.gui.EliminarPersonaGui;
@@ -42,6 +44,7 @@ public class Coordinador {
 	private ListarMascotasGui miListarMascotas;
 	private EliminarMascotaGui miEliminarMascotaGui;
 	private ActualizarMascotaGui miActualizarMascotaGui;
+	private ConsultarProductoGui miConsultarProductoGui;
 
 	public void setVentanaPrincipal(VentanaPrincipal miVentanaPrincipal) {
 		this.miVentanaPrincipal = miVentanaPrincipal;
@@ -240,6 +243,31 @@ public class Coordinador {
 	public void setMiActualizarMascotaGui(ActualizarMascotaGui miActualizarMascotaGui) {
 		this.miActualizarMascotaGui=miActualizarMascotaGui;
 		
+	}
+
+	public void mostrarVentanRegistroProducto() {
+		// TODO Auto-generated method stub
+		this.miRegistrarProductosGui.setVisible(true);
+	}
+
+	public String registrarProducto(ProductoVo miProducto) {
+		// TODO Auto-generated method stub
+		return miProductoDao.registrarProducto(miProducto);
+	}
+
+	public void setMiConsultarProductoGui(ConsultarProductoGui miConsultarProductoGui) {
+		// TODO Auto-generated method stub
+		this.miConsultarProductoGui=miConsultarProductoGui;
+	}
+
+	public void mostrarVentanaConsultarProducto() {
+		// TODO Auto-generated method stub
+		miConsultarProductoGui.setVisible(true);
+	}
+
+	public ProductoVo consultarProducto(Long idProducto) {
+		// TODO Auto-generated method stub
+		return miProductoDao.consultarProducto(idProducto);
 	}
 
 	

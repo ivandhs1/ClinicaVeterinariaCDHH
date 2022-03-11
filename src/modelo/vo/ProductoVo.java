@@ -5,6 +5,7 @@ public class ProductoVo {
 	private Long idProducto;
 	private String nombreProducto;
 	private Double precioProducto;
+	private Long idPersona;
 	
 	public ProductoVo() {
 		
@@ -29,6 +30,14 @@ public class ProductoVo {
 		return nombreProducto;
 	}
 
+	public Long getIdPersona() {
+		return idPersona;
+	}
+
+	public void setIdPersona(Long idPersona) {
+		this.idPersona = idPersona;
+	}
+	
 	public void setNombreProducto(String nombreProducto) {
 		this.nombreProducto = nombreProducto;
 	}
@@ -47,7 +56,6 @@ public class ProductoVo {
 				+ "nombreProducto=" + nombreProducto + ", "
 				+ "precioProducto="+ precioProducto + "]";
 	}
-	
 	
 	
 }
