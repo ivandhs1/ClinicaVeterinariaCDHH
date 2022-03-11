@@ -30,7 +30,7 @@ create table mascotas(
 
 create table productos 
 (
-	id_producto int primary key not null auto_increment,
+	id_producto int primary key not null,
     nombre_producto varchar(45),
     precio_producto double
 );
