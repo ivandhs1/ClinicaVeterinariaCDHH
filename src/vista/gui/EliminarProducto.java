@@ -2,45 +2,32 @@ package vista.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
-import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
+import javax.swing.border.EmptyBorder;
 
 import controlador.Coordinador;
-import modelo.vo.MascotaVo;
 import modelo.vo.PersonaVo;
 import modelo.vo.PersonasProductosVo;
 import modelo.vo.ProductoVo;
 
-import javax.swing.JSeparator;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-
-public class ConsultarProductoGui extends JDialog implements ActionListener{
-
+public class EliminarProducto extends JDialog implements ActionListener{
 	private Coordinador miCoordinador;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtNombre;
 	private JTextField txtPrecio;
 	private JButton btnCancelar;
 	private JButton btnBuscar;
+	private JButton btnEliminar,btnNo, btnSi;
 	private JTextField txtIdProducto;
 	private JTextField txtIdPersona;
+	private JLabel lblseguro;
+	private ProductoVo miProducto;
+	private PersonasProductosVo produc;
 
 
 	/**
@@ -49,7 +36,7 @@ public class ConsultarProductoGui extends JDialog implements ActionListener{
 	 * @param ventanaPrincipal 
 	 * @param documento 
 	 */
-	public ConsultarProductoGui(VentanaPrincipal ventanaPrincipal, boolean modal) {
+	public EliminarProducto(VentanaPrincipal ventanaPrincipal, boolean modal) {
 		super(ventanaPrincipal,modal);
 		setSize( 412, 266);
 		setLocationRelativeTo(null);
@@ -66,7 +53,7 @@ public class ConsultarProductoGui extends JDialog implements ActionListener{
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		JLabel lblTitulo = new JLabel("CONSULTAR PRODUCTOS");
+		JLabel lblTitulo = new JLabel("ELIMINAR PRODUCTO");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Tw Cen MT", Font.BOLD, 20));
 		lblTitulo.setBounds(10, 10, 372, 28);
@@ -103,12 +90,15 @@ public class ConsultarProductoGui extends JDialog implements ActionListener{
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(this);
 		btnCancelar.setBounds(266, 144, 89, 23);
-		btnCancelar.setBackground(new Color(255, 192, 203));
 		panel.add(btnCancelar);
+	
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(this);
+		btnEliminar.setBounds(146, 144, 100, 23);
+		panel.add(btnEliminar);
 		
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.setBounds(266, 19, 89, 23);
-		btnBuscar.setBackground(SystemColor.activeCaption);
 		btnBuscar.addActionListener(this);
 		panel.add(btnBuscar);
 		
@@ -129,6 +119,26 @@ public class ConsultarProductoGui extends JDialog implements ActionListener{
 		txtIdPersona.setColumns(10);
 		txtIdPersona.setBounds(89, 64, 86, 20);
 		panel.add(txtIdPersona);
+		
+		lblseguro = new JLabel("\u00BFSeguro?");
+		lblseguro.setBounds(40, 130, 57, 21);
+		panel.add(lblseguro);
+		
+		btnNo = new JButton("No");
+		btnNo.setBackground(new Color(152, 251, 152));
+		btnNo.setBounds(70, 150, 50, 23);
+		btnNo.addActionListener(this);
+		panel.add(btnNo);
+		
+		btnSi = new JButton("Si");
+		btnSi.setBackground(new Color(255, 192, 203));
+		btnSi.setBounds(5, 150, 50, 23);
+		btnSi.addActionListener(this);
+		panel.add(btnSi);
+		lblseguro.setVisible(false);
+		btnNo.setVisible(false);
+		btnSi.setVisible(false);
+		btnEliminar.setVisible(false);
 	}
 
 
@@ -138,13 +148,20 @@ public class ConsultarProductoGui extends JDialog implements ActionListener{
 		if(e.getSource()==btnBuscar) {
 			
 			Long idProducto = Long.parseLong(txtIdProducto.getText());
-			ProductoVo miProducto = miCoordinador.consultarProducto(idProducto);
+			miProducto = miCoordinador.consultarProducto(idProducto);
 			
 			if(miProducto!=null) {
-				PersonasProductosVo produc = miCoordinador.buscarPproducto(Long.parseLong(txtIdProducto.getText()));
+				produc = miCoordinador.buscarPproducto(Long.parseLong(txtIdProducto.getText()));
 				txtIdPersona.setText(produc.getPersonaId()+"");
 				txtNombre.setText(miProducto.getNombreProducto());
 				txtPrecio.setText(miProducto.getPrecioProducto()+"");
+				
+				btnEliminar.setVisible(true);
+				
+				txtIdPersona.setEnabled(false);
+				txtNombre.setEnabled(false);
+				txtPrecio.setEnabled(false);
+				
 				
 			}else {
 				JOptionPane.showMessageDialog(null, "Producto no existente");
@@ -152,6 +169,33 @@ public class ConsultarProductoGui extends JDialog implements ActionListener{
 			
 		}else if(e.getSource()==btnCancelar) {
 			this.dispose();
+		}else if(e.getSource()==btnEliminar) {
+			lblseguro.setVisible(true);
+			btnNo.setVisible(true);
+			btnSi.setVisible(true);
+		}else if(e.getSource()==btnNo) {
+			btnEliminar.setVisible(false);
+			lblseguro.setVisible(false);
+			btnNo.setVisible(false);
+			btnSi.setVisible(false);
+		}else if(e.getSource()==btnSi) {
+			
+			produc.setProductoId(Long.parseLong(txtIdProducto.getText()));
+			String eli = miCoordinador.eliminarPprodcuto(produc);
+			
+			miProducto.setIdProducto(Long.parseLong(txtIdProducto.getText()));
+			String verificacionEl = miCoordinador.eliminarProducto(miProducto);
+			
+			
+			
+			if(verificacionEl.equals("ok") && eli.equals("ok")) {
+				
+				JOptionPane.showMessageDialog(null, "Eliminacion Exitosa");
+				this.dispose();
+				
+			}else {
+				System.out.println("Ocurrio un error");
+			}
 		}
 	}
 
@@ -160,10 +204,8 @@ public class ConsultarProductoGui extends JDialog implements ActionListener{
 		// TODO Auto-generated method stub
 		this.miCoordinador = miCoordinador;
 	}
-
-
-	public void limpiar() {
-		// TODO Auto-generated method stub
+	
+	public void vaciar() {
 		txtIdPersona.setText("");
 		txtIdProducto.setText("");
 		txtNombre.setText("");

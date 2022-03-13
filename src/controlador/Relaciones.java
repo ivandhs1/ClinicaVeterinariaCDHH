@@ -7,12 +7,15 @@ import modelo.dao.PersonaProductoDao;
 import modelo.dao.ProductoDao;
 import vista.gui.ActualizarMascotaGui;
 import vista.gui.ActualizarPersonaGui;
+import vista.gui.ActualizarProducto;
 import vista.gui.ConsultarMascotaGui;
 import vista.gui.ConsultarPersonaGui;
 import vista.gui.ConsultarProductoGui;
 import vista.gui.EliminarMascotaGui;
 import vista.gui.ListarPersonas;
+import vista.gui.ListarProductos;
 import vista.gui.EliminarPersonaGui;
+import vista.gui.EliminarProducto;
 import vista.gui.ListarMascotasGui;
 import vista.gui.RegistrarMascotasGui;
 import vista.gui.RegistrarPersonasGui;
@@ -39,6 +42,12 @@ public class Relaciones {
 		EliminarPersonaGui miEliminarPersonaGui;
 		ActualizarPersonaGui miActualizarPersonaGui;
 		ListarPersonas miListarPersonas;
+		ActualizarProducto miActualizarProducto;
+		EliminarProducto miEliminarProducto;
+		ListarProductos miListarProductos;
+		
+		//se instacian por unica ocasion las clases declaradas
+		
 		ListarMascotasGui miListarMascotas;
 		ConsultarMascotaGui miConsultarMascotaGui;
 		EliminarMascotaGui miEliminarMascotaGui;
@@ -53,6 +62,10 @@ public class Relaciones {
 		miRegistrarProductosGui = new RegistrarProductosGui(miVentanaPrincipal, true);
 		miConsultarPersonaGui = new ConsultarPersonaGui(miVentanaPrincipal, true);
 		miEliminarPersonaGui = new EliminarPersonaGui(miVentanaPrincipal, true);
+		miListarPersonas = new ListarPersonas();
+		miActualizarProducto = new ActualizarProducto(miVentanaPrincipal, true);
+		miEliminarProducto = new EliminarProducto(miVentanaPrincipal, true);
+		miListarProductos = new ListarProductos();
 		miActualizarPersonaGui = new ActualizarPersonaGui(miVentanaPrincipal, true);
 		miConsultarMascotaGui = new ConsultarMascotaGui(miVentanaPrincipal, true);
 		miEliminarMascotaGui  = new EliminarMascotaGui(miVentanaPrincipal, true);
@@ -67,7 +80,6 @@ public class Relaciones {
 		miPersonaProductoDao = new PersonaProductoDao();
 		miListarPersonas = new ListarPersonas();
 		miListarMascotas = new ListarMascotasGui();
-		
 
 		// Se establece la relacion entre el coordinador y cada instancia unica
 
@@ -86,6 +98,12 @@ public class Relaciones {
 		miCoordinador.setProductoDao(miProductoDao);
 		miCoordinador.setPersonaProductoDao(miPersonaProductoDao);
 		miCoordinador.setMiListarPersonas(miListarPersonas);
+		miCoordinador.setMiActualizarProducto(miActualizarProducto);
+		miCoordinador.setMiEliminarProducto(miEliminarProducto);
+		miCoordinador.setMiListarProductos(miListarProductos);
+		
+		//a cada clase unica se le asigna la unica instancia del coordinador
+		
 		miCoordinador.setMiListarMascotas(miListarMascotas);
 		miCoordinador.setConsultarMascotaGui(miConsultarMascotaGui);
 		miCoordinador.setMiEliminarMascotaGui(miEliminarMascotaGui);
@@ -108,10 +126,14 @@ public class Relaciones {
 		miProductoDao.setCoordinador(miCoordinador);
 		miPersonaProductoDao.setCoordinador(miCoordinador);
 		miListarPersonas.setMiCoordinador(miCoordinador);
+		miActualizarProducto.setCoordinador(miCoordinador);
+		miEliminarProducto.setCoordinador(miCoordinador);
+		miListarProductos.setMiCoordinador(miCoordinador);
 		miListarMascotas.setMiCoordinador(miCoordinador);
 		miEliminarMascotaGui.setMiCoordinador(miCoordinador);
 		miActualizarMascotaGui.setMiCoordinador(miCoordinador);
 		miConsultarProductoGui.setCoordinador(miCoordinador);
+
 
 		miVentanaPrincipal.setVisible(true);
 	}

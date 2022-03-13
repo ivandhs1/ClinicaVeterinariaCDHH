@@ -10,15 +10,19 @@ import modelo.dao.ProductoDao;
 import modelo.vo.MascotaVo;
 import modelo.vo.NacimientoVo;
 import modelo.vo.PersonaVo;
+import modelo.vo.PersonasProductosVo;
 import modelo.vo.ProductoVo;
 import vista.gui.ActualizarMascotaGui;
 import vista.gui.ActualizarPersonaGui;
+import vista.gui.ActualizarProducto;
 import vista.gui.ConsultarMascotaGui;
 import vista.gui.ConsultarPersonaGui;
 import vista.gui.ConsultarProductoGui;
 import vista.gui.EliminarMascotaGui;
 import vista.gui.ListarPersonas;
+import vista.gui.ListarProductos;
 import vista.gui.EliminarPersonaGui;
+import vista.gui.EliminarProducto;
 import vista.gui.ListarMascotasGui;
 import vista.gui.RegistrarMascotasGui;
 import vista.gui.RegistrarPersonasGui;
@@ -39,6 +43,9 @@ public class Coordinador {
 	ProductoDao miProductoDao;
 	PersonaProductoDao miPersonaProductoDao;
 	ListarPersonas miListarPersonas;
+	ActualizarProducto miActualizarProducto;
+	EliminarProducto miEliminarProducto;
+	ListarProductos miListarProductos;
 	ConsultarMascotaGui miConsultarMascotaGui;
 	private EliminarPersonaGui miEliminarPersonaGui;
 	private ListarMascotasGui miListarMascotas;
@@ -196,6 +203,18 @@ public class Coordinador {
 	public void setMiListarPersonas(ListarPersonas miListarPersonas) {
 		this.miListarPersonas = miListarPersonas;
 	}
+	
+	public void setMiActualizarProducto(ActualizarProducto miActualizarProducto) {
+		this.miActualizarProducto = miActualizarProducto;
+	}
+	
+	public void setMiEliminarProducto(EliminarProducto miEliminarProdcutos) {
+		this.miEliminarProducto = miEliminarProdcutos;
+	}
+	
+	public void setMiListarProductos(ListarProductos miListarProductos) {
+		this.miListarProductos = miListarProductos;
+	}
 
 	public void setMiConsultarPersonasGui(ConsultarPersonaGui miConsultarPersonasGui) {
 		this.miConsultarPersonasGui = miConsultarPersonasGui;
@@ -214,6 +233,23 @@ public class Coordinador {
 	public String eliminarPersona(PersonaVo p) {
 		return miPersonaDao.eliminarPersona(p);
 	}
+	
+	public void mostrarActualizarProductos() {
+		miActualizarProducto.setVisible(true);
+		miActualizarProducto.vaciar();
+		miActualizarProducto.escirbir();
+	}
+	
+	public void mostrarEliminarProductos() {
+		miEliminarProducto.setVisible(true);
+		miEliminarProducto.vaciar();
+	}
+	
+	public void mostrarListarProductos() {
+		miListarProductos.setVisible(true);
+		miListarProductos.llenar(listarProductos());
+	}
+
 	public String eliminarMascota(MascotaVo p) {
 		return miMascotaDao.eliminarMascota(p);
 	}
@@ -256,6 +292,7 @@ public class Coordinador {
 	public void mostrarVentanRegistroProducto() {
 		// TODO Auto-generated method stub
 		this.miRegistrarProductosGui.setVisible(true);
+		miRegistrarProductosGui.limpiar();
 	}
 
 	public String registrarProducto(ProductoVo miProducto) {
@@ -278,9 +315,48 @@ public class Coordinador {
 		// TODO Auto-generated method stub
 		return miProductoDao.consultarProducto(idProducto);
 	}
-
+	
+	public String actualizarProducto(ProductoVo producto) {
+		return miProductoDao.actualizarProducto(producto);
+	}
 	
 
+	public String eliminarProducto(ProductoVo producto) {
+		return miProductoDao.eliminarProducto(producto);
+	}
 	
+	public ArrayList<ProductoVo> listarProductos(){
+		return miProductoDao.imprimirProductos();
+	}
+	
+	public PersonasProductosVo buscarPproducto(long codigo) {
+		return miPersonaProductoDao.consultarProducto(codigo);
+	}
+	
+	public String crearPproducto(PersonasProductosVo produc) {
+	 return	miPersonaProductoDao.registrarProducto(produc);
+	}
+	
+	public String actualizarPproducto(PersonasProductosVo produc) {
+		return miPersonaProductoDao.actualizarProductos(produc);
+	}
+	
+	public String eliminarPprodcuto(PersonasProductosVo produc) {
+		return miPersonaProductoDao.eliminarProductos(produc);
+	}
+	
+	public String eliminarProductosPerso(long id) {
+		return miPersonaProductoDao.eliminarProductosP(id);
+	}
+	
+	public String eliminarProporid(long id) {
+	
+		return	 miProductoDao.eliminarProductop(id);
+	
+	}
+	
+	public ArrayList<Long> consultarproductos(long id){
+		return miPersonaProductoDao.selecionarProductos(id);
+	}
 
 }
