@@ -213,39 +213,12 @@ public class RegistrarPersonasGui extends JDialog implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==btnRegistrar) {
-			PersonaVo miPersona = new PersonaVo();
-			miPersona.setIdPersona(Long.parseLong(txtDocumento.getText()));
-			miPersona.setNombre(txtNombre.getText());
-			miPersona.setProfesion(txtProfesion.getText());
-			miPersona.setTelefono(txtTelefono.getText());
-			miPersona.setTipo(Integer.parseInt(txtTipo.getText()));
-			
-			NacimientoVo miNacimiento = new NacimientoVo();
-			miNacimiento.setCiudadNacimiento(txtCiudad.getText());
-			miNacimiento.setDepartamentoNacimiento(txtDepartamento.getText());
-			miNacimiento.setPaisNacimiento(txtPais.getText());
-			miNacimiento.setFechaNacimiento(LocalDate.of(Integer.parseInt(txtAnio.getText()), Integer.parseInt(txtMes.getText()), Integer.parseInt(txtDia.getText())));
-			
-			miPersona.setNacimiento(miNacimiento);
-			
-			Long idNacimiento=miCoordinador.registrarNacimiento(miPersona);
-			if(idNacimiento!=null) {
-				miPersona.getNacimiento().setIdNacimiento(idNacimiento);
-				
-				String res=miCoordinador.registrarPersona(miPersona);
-				if(res.equals("ok")) {
-					JOptionPane.showMessageDialog(null, "Registro Exitoso!");
-					limpiar();
-				}else {
-					JOptionPane.showMessageDialog(null, res, "ERROR", JOptionPane.ERROR_MESSAGE);
-				}
-				
-			}else {
-				JOptionPane.showMessageDialog(null, "No se pudo Registrar el Nacimiento","ERROR",JOptionPane.ERROR_MESSAGE);			
-			}
-			
+			registrar();
 		}else if(e.getSource()==btnAgregarMascotas) {
+			registrar2();
 			miCoordinador.mostrarVentanaRegistroMascotas(Long.parseLong(txtDocumento.getText()));
+			this.dispose();
+			
 		}else if(e.getSource()==btnCancelar) {
 			limpiar();
 			this.dispose();
@@ -274,4 +247,68 @@ public class RegistrarPersonasGui extends JDialog implements ActionListener{
 		txtCiudad.setText("");
 	}
 	
+	public void registrar() {
+		PersonaVo miPersona = new PersonaVo();
+		miPersona.setIdPersona(Long.parseLong(txtDocumento.getText()));
+		miPersona.setNombre(txtNombre.getText());
+		miPersona.setProfesion(txtProfesion.getText());
+		miPersona.setTelefono(txtTelefono.getText());
+		miPersona.setTipo(Integer.parseInt(txtTipo.getText()));
+		
+		NacimientoVo miNacimiento = new NacimientoVo();
+		miNacimiento.setCiudadNacimiento(txtCiudad.getText());
+		miNacimiento.setDepartamentoNacimiento(txtDepartamento.getText());
+		miNacimiento.setPaisNacimiento(txtPais.getText());
+		miNacimiento.setFechaNacimiento(LocalDate.of(Integer.parseInt(txtAnio.getText()), Integer.parseInt(txtMes.getText()), Integer.parseInt(txtDia.getText())));
+		
+		miPersona.setNacimiento(miNacimiento);
+		
+		Long idNacimiento=miCoordinador.registrarNacimiento(miPersona);
+		if(idNacimiento!=null) {
+			miPersona.getNacimiento().setIdNacimiento(idNacimiento);
+			
+			String res=miCoordinador.registrarPersona(miPersona);
+			if(res.equals("ok")) {
+				JOptionPane.showMessageDialog(null, "Registro Exitoso!");
+				limpiar();
+			}else {
+				JOptionPane.showMessageDialog(null, res, "ERROR", JOptionPane.ERROR_MESSAGE);
+			}
+			
+		}else {
+			JOptionPane.showMessageDialog(null, "No se pudo Registrar el Nacimiento","ERROR",JOptionPane.ERROR_MESSAGE);			
+		}
+	}
+	
+	public void registrar2() {
+		PersonaVo miPersona = new PersonaVo();
+		miPersona.setIdPersona(Long.parseLong(txtDocumento.getText()));
+		miPersona.setNombre(txtNombre.getText());
+		miPersona.setProfesion(txtProfesion.getText());
+		miPersona.setTelefono(txtTelefono.getText());
+		miPersona.setTipo(Integer.parseInt(txtTipo.getText()));
+		
+		NacimientoVo miNacimiento = new NacimientoVo();
+		miNacimiento.setCiudadNacimiento(txtCiudad.getText());
+		miNacimiento.setDepartamentoNacimiento(txtDepartamento.getText());
+		miNacimiento.setPaisNacimiento(txtPais.getText());
+		miNacimiento.setFechaNacimiento(LocalDate.of(Integer.parseInt(txtAnio.getText()), Integer.parseInt(txtMes.getText()), Integer.parseInt(txtDia.getText())));
+		
+		miPersona.setNacimiento(miNacimiento);
+		
+		Long idNacimiento=miCoordinador.registrarNacimiento(miPersona);
+		if(idNacimiento!=null) {
+			miPersona.getNacimiento().setIdNacimiento(idNacimiento);
+			
+			String res=miCoordinador.registrarPersona(miPersona);
+			if(res.equals("ok")) {
+				System.out.println("Registro Exitoso!");
+			}else {
+				System.out.println("error");
+			}
+			
+		}else {
+			System.out.println("No se pudo Registrar el Nacimiento");		
+		}
+	}
 }

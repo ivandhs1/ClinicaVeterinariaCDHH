@@ -236,10 +236,13 @@ public class Coordinador {
 	
 	public void mostrarActualizarProductos() {
 		miActualizarProducto.setVisible(true);
+		miActualizarProducto.vaciar();
+		miActualizarProducto.escirbir();
 	}
 	
 	public void mostrarEliminarProductos() {
 		miEliminarProducto.setVisible(true);
+		miEliminarProducto.vaciar();
 	}
 	
 	public void mostrarListarProductos() {
@@ -289,6 +292,7 @@ public class Coordinador {
 	public void mostrarVentanRegistroProducto() {
 		// TODO Auto-generated method stub
 		this.miRegistrarProductosGui.setVisible(true);
+		miRegistrarProductosGui.limpiar();
 	}
 
 	public String registrarProducto(ProductoVo miProducto) {

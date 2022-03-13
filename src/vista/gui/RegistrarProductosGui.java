@@ -84,7 +84,7 @@ public class RegistrarProductosGui extends JDialog implements ActionListener{
 		
 		txtNombre = new JTextField();
 		txtNombre.setColumns(10);
-		txtNombre.setBounds(89, 66, 86, 20);
+		txtNombre.setBounds(80, 66, 86, 20);
 		panel.add(txtNombre);
 		
 		JLabel lblPrecio = new JLabel("Precio:");
@@ -113,7 +113,7 @@ public class RegistrarProductosGui extends JDialog implements ActionListener{
 		panel.add(btnRegistrar);
 		
 		JLabel lblidProducto = new JLabel("Id Producto: ");
-		lblidProducto.setBounds(25, 23, 71, 14);
+		lblidProducto.setBounds(15, 23, 71, 14);
 		panel.add(lblidProducto);
 		
 		txtIdProducto = new JTextField();
@@ -172,5 +172,13 @@ public class RegistrarProductosGui extends JDialog implements ActionListener{
 	public void setCoordinador(Coordinador miCoordinador) {
 		// TODO Auto-generated method stub
 		this.miCoordinador = miCoordinador;
+	}
+	
+	public void limpiar() {
+		// TODO Auto-generated method stub
+		txtIdPersona.setText("");
+		txtIdProducto.setText("");
+		txtNombre.setText("");
+		txtPrecio.setText("");
 	}
 }

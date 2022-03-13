@@ -106,6 +106,7 @@ public class ActualizarProducto extends JDialog implements ActionListener{
 		
 		txtIdProducto = new JTextField();
 		txtIdProducto.setBounds(170, 20, 86, 20);
+		txtIdProducto.setEnabled(true);
 		panel.add(txtIdProducto);
 		txtIdProducto.setColumns(10);
 		
@@ -134,7 +135,7 @@ public class ActualizarProducto extends JDialog implements ActionListener{
 				txtIdPersona.setText(produc.getProductoId()+"");
 				txtNombre.setText(miProducto.getNombreProducto());
 				txtPrecio.setText(miProducto.getPrecioProducto()+"");
-				
+				txtIdProducto.setEnabled(false);
 			}else {
 				JOptionPane.showMessageDialog(null, "Producto no existente");
 			}
@@ -179,5 +180,9 @@ public class ActualizarProducto extends JDialog implements ActionListener{
 		txtIdProducto.setText("");
 		txtNombre.setText("");
 		txtPrecio.setText("");
+	}
+	
+	public void escirbir() {
+		txtIdProducto.setEnabled(true);
 	}
 }

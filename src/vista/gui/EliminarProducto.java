@@ -158,6 +158,11 @@ public class EliminarProducto extends JDialog implements ActionListener{
 				
 				btnEliminar.setVisible(true);
 				
+				txtIdPersona.setEnabled(false);
+				txtNombre.setEnabled(false);
+				txtPrecio.setEnabled(false);
+				
+				
 			}else {
 				JOptionPane.showMessageDialog(null, "Producto no existente");
 			}
